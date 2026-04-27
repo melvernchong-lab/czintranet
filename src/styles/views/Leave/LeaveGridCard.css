@@ -1,0 +1,319 @@
+/* ============ LEAVE CARD - BASE STYLES ============ */
+.leave-card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  padding: 18px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dark .leave-card {
+  background: #1a1d2d;
+  border-color: #323b67;
+}
+
+.leave-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .leave-card:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+}
+
+/* ============ LEAVE CARD - HEADER ============ */
+.leave-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 25px;
+}
+
+/* ============ LEAVE CARD - ICON ============ */
+.leave-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+/* Annual Leave (AL) */
+.leave-icon.annual,
+.leave-icon.al {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.dark .leave-icon.annual,
+.dark .leave-icon.al {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+/* Onsite Plan (OS) */
+.leave-icon.onsite,
+.leave-icon.os {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.dark .leave-icon.onsite,
+.dark .leave-icon.os {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+}
+
+/* Compassionate Leave (CL) */
+.leave-icon.compassionate,
+.leave-icon.cl {
+  background: rgba(236, 72, 153, 0.15);
+  color: #ec4899;
+}
+
+.dark .leave-icon.compassionate,
+.dark .leave-icon.cl {
+  background: rgba(236, 72, 153, 0.2);
+  color: #f472b6;
+}
+
+/* Medical Leave (MC) */
+.leave-icon.medical,
+.leave-icon.mc {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.dark .leave-icon.medical,
+.dark .leave-icon.mc {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+/* Work From Home (WFH) */
+.leave-icon.workfromhome,
+.leave-icon.wfh {
+  background: rgba(99, 102, 241, 0.15);
+  color: #6366f1;
+}
+
+.dark .leave-icon.workfromhome,
+.dark .leave-icon.wfh {
+  background: rgba(99, 102, 241, 0.2);
+  color: #818cf8;
+}
+
+/* ============ LEAVE CARD - LABEL ============ */
+.leave-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}
+
+.dark .leave-label {
+  color: white;
+}
+
+/* ============ LEAVE CARD - CONTENT ============ */
+.leave-content {
+  flex: 1;
+  margin-bottom: 20px;
+}
+
+.leave-value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.dark .leave-value {
+  color: white;
+}
+
+.leave-detail {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+.dark .leave-detail {
+  color: #94a3b8;
+}
+
+/* ============ LEAVE CARD - PROGRESS BAR ============ */
+.leave-progress-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.dark .leave-progress-bar {
+  background: #323b67;
+}
+
+.leave-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Progress Fill Colors */
+.leave-progress-fill.annual,
+.leave-progress-fill.al {
+  background: #10b981;
+}
+
+.leave-progress-fill.onsite,
+.leave-progress-fill.os {
+  background: #f59e0b;
+}
+
+.leave-progress-fill.compassionate,
+.leave-progress-fill.cl {
+  background: #ec4899;
+}
+
+.leave-progress-fill.medical,
+.leave-progress-fill.mc {
+  background: #ef4444;
+}
+
+.leave-progress-fill.workfromhome,
+.leave-progress-fill.wfh {
+  background: #6366f1;
+}
+
+/* ============ LEAVE CARD - GRADIENT BACKGROUNDS ============ */
+.card-annual {
+  background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+}
+
+.dark .card-annual {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, #1a1d2d 100%);
+}
+
+.card-onsite {
+  background: linear-gradient(135deg, #f0fdfa 0%, #ffffff 100%);
+}
+
+.dark .card-onsite {
+  background: linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, #1a1d2d 100%);
+}
+
+.card-special {
+  background: linear-gradient(135deg, #faf5ff 0%, #ffffff 100%);
+}
+
+.dark .card-special {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, #1a1d2d 100%);
+}
+
+.card-medical {
+  background: linear-gradient(135deg, #fff1f2 0%, #ffffff 100%);
+}
+
+.dark .card-medical {
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.1) 0%, #1a1d2d 100%);
+}
+
+/* ============ RESPONSIVE STYLES ============ */
+/* Tablet (1024px and below) */
+@media (max-width: 1024px) {
+  .leave-card {
+    padding: 16px;
+  }
+
+  .leave-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .leave-value {
+    font-size: 20px;
+  }
+
+  .leave-label {
+    font-size: 14px;
+  }
+}
+
+/* Mobile (768px and below) */
+@media (max-width: 768px) {
+  .leave-card {
+    padding: 12px;
+  }
+
+  .leave-header {
+    margin-bottom: 16px;
+  }
+
+  .leave-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .leave-value {
+    font-size: 18px;
+  }
+
+  .leave-label {
+    font-size: 13px;
+  }
+
+  .leave-detail {
+    font-size: 11px;
+  }
+}
+
+/* Small Mobile (480px and below) */
+@media (max-width: 480px) {
+  .leave-card {
+    padding: 10px;
+  }
+
+  .leave-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+
+  .leave-value {
+    font-size: 16px;
+  }
+}
+
+/* Extra Small Mobile (360px and below) */
+@media (max-width: 360px) {
+  .leave-card {
+    padding: 8px;
+  }
+
+  .leave-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .leave-value {
+    font-size: 14px;
+  }
+
+  .leave-label {
+    font-size: 12px;
+  }
+}

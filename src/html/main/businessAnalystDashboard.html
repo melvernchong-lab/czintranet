@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Business Analyst Dashboard</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-full min-h-screen w-full">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col fixed inset-y-0">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary size-8 rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">BA Central</h2>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<p class="text-sm font-semibold">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<p class="text-sm font-medium">Requirements</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">checklist</span>
+<p class="text-sm font-medium">Backlog</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">menu_book</span>
+<p class="text-sm font-medium">Wiki</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">folder_open</span>
+<p class="text-sm font-medium">Document Library</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+<p class="text-sm font-medium">Stakeholders</p>
+</div>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg font-bold text-sm shadow-sm hover:bg-blue-700 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>New Requirement</span>
+</button>
+<div class="mt-6 flex items-center gap-3 p-2">
+<div class="size-9 rounded-full bg-cover bg-center" data-alt="User avatar profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC22ks_Nc_5mk-EfNaPInUX7h0F86-FKZkbfmIPHHMjTwkS3Dhd79N5XhPye1Dh715EA8p5VMDVIPbxl70NiH_T8Ca5U5z4v0I5USwzhQh_OY2wU-KnrKRW_EuTWlHSi8fYwMA846QrryDeMVnf6sbbBHfnBUq7F94fxJUUTdyHJ71KLtTaIb-EbyjOsXglKMtDit2ekRvPkBYz7hDB0kWQSGrK0JfRNFKZymfW7P0AQbGMGYR7c_S_igk41nxenu_HumkPovLFmnw')"></div>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate">Sarah Jenkins</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider">Sr. Business Analyst</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-10 px-8 flex items-center justify-between">
+<div class="flex items-center gap-2 text-sm">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Project Alpha</a>
+<span class="text-slate-300">/</span>
+<span class="font-semibold">Dashboard</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg py-1.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search docs, reqs..." type="text"/>
+</div>
+<button class="size-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="size-9 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<div class="p-8 max-w-7xl mx-auto w-full">
+<!-- Page Heading -->
+<div class="mb-8">
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Business Analyst Dashboard</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Real-time overview of requirements and documentation status.</p>
+</div>
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Requirements Approved</p>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="text-2xl font-bold">85%</span>
+<span class="text-xs font-bold text-emerald-500 flex items-center"><span class="material-symbols-outlined text-[14px]">arrow_upward</span>5%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Pending Feedback</p>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="text-2xl font-bold">12 Reqs</span>
+<span class="text-xs font-bold text-rose-500 flex items-center"><span class="material-symbols-outlined text-[14px]">priority_high</span>Action</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Groomed Backlog</p>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="text-2xl font-bold">72%</span>
+<span class="text-xs font-bold text-emerald-500 flex items-center"><span class="material-symbols-outlined text-[14px]">trending_up</span>10%</span>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Wiki Updates</p>
+<div class="flex items-baseline gap-2 mt-2">
+<span class="text-2xl font-bold">14 Today</span>
+<span class="text-xs font-bold text-slate-400 flex items-center"><span class="material-symbols-outlined text-[14px]">schedule</span>Recent</span>
+</div>
+</div>
+</div>
+<!-- Main Widgets Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Pending Stakeholder Feedback -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h3 class="font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-500">campaign</span>
+                                Pending Stakeholder Feedback
+                            </h3>
+<button class="text-xs font-bold text-primary hover:underline">View All</button>
+</div>
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 uppercase text-[11px] font-bold tracking-wider">
+<tr>
+<th class="px-6 py-3">Requirement</th>
+<th class="px-6 py-3">Stakeholder</th>
+<th class="px-6 py-3">Aging</th>
+<th class="px-6 py-3 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-medium">REQ-402: Payment Gateway API</td>
+<td class="px-6 py-4">Mark Thompson (CTO)</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 text-xs font-bold">3 Days</span></td>
+<td class="px-6 py-4 text-right">
+<button class="px-3 py-1 bg-primary/10 text-primary rounded text-xs font-bold hover:bg-primary/20">Nudge</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-medium">REQ-405: User Profile UX</td>
+<td class="px-6 py-4">Linda Zhao (Product)</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 text-xs font-bold">1 Day</span></td>
+<td class="px-6 py-4 text-right">
+<button class="px-3 py-1 bg-primary/10 text-primary rounded text-xs font-bold hover:bg-primary/20">Nudge</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4 font-medium">REQ-411: Analytics Dashboard</td>
+<td class="px-6 py-4">David G. (Lead Dev)</td>
+<td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400 text-xs font-bold">4 Hours</span></td>
+<td class="px-6 py-4 text-right">
+<button class="px-3 py-1 bg-primary/10 text-primary rounded text-xs font-bold hover:bg-primary/20">Nudge</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Requirements Approval Status -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 flex flex-col">
+<h3 class="font-bold flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">donut_large</span>
+                            Approval Status
+                        </h3>
+<div class="flex-1 flex flex-col items-center justify-center space-y-6">
+<!-- SVG Donut Chart Placeholder -->
+<div class="relative size-40">
+<svg class="size-full" viewbox="0 0 36 36">
+<circle class="stroke-slate-100 dark:stroke-slate-800" cx="18" cy="18" fill="none" r="16" stroke-width="3"></circle>
+<circle class="stroke-primary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="85, 100" stroke-dashoffset="25" stroke-width="3"></circle>
+<circle class="stroke-amber-400" cx="18" cy="18" fill="none" r="16" stroke-dasharray="10, 100" stroke-dashoffset="40" stroke-width="3"></circle>
+<circle class="stroke-rose-400" cx="18" cy="18" fill="none" r="16" stroke-dasharray="5, 100" stroke-dashoffset="50" stroke-width="3"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-2xl font-black">48</span>
+<span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Total Reqs</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 w-full">
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-primary"></span>
+<span class="text-xs font-medium">Approved (85%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-amber-400"></span>
+<span class="text-xs font-medium">Draft (10%)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-rose-400"></span>
+<span class="text-xs font-medium">Blocked (5%)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Backlog Grooming Progress -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm p-6">
+<h3 class="font-bold flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-emerald-500">rebase_edit</span>
+                            Backlog Grooming
+                        </h3>
+<p class="text-xs text-slate-500 mb-6 leading-relaxed">Sprint 14 Readiness: Focus on refining user stories and acceptance criteria for upcoming milestones.</p>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span>User Stories Refined</span>
+<span>24 / 30</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 80%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-bold mb-2">
+<span>Estimation Complete</span>
+<span>18 / 30</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 60%"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-50 dark:border-slate-800 flex justify-between items-center">
+<div class="flex -space-x-2">
+<div class="size-7 rounded-full border-2 border-white bg-slate-200" data-alt="Avatar of team member 1" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBVNQZQEbwcoFFObDc4MRqjc44cRO8GOj_dHcDF0QPX3DlxjDpRO2MTCMKDzcAA_DJylAdnLfPOq87kXml7z9YXzGI5KnxvzaC8NG_BWMK0ckNqIcqaTc2AtC_PJMD3Sbz_0PjLIQk29sKW7jDXr3bNf4qmamarQ2BC76_zSQ8xQ4usm0B73-4xt_sM_5LqA8KrRQwU4ygazd1BWPdBGfB6JY10JSi5nRJ-6ERoAQkuBOugecB755Xcbwk_1XR9N7lXvmP1N6jH16o')"></div>
+<div class="size-7 rounded-full border-2 border-white bg-slate-200" data-alt="Avatar of team member 2" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJO_2KaNEbzteye1h44EEZHqgbYp7uToOjW0_8uWAR1dbyst_ui1cGennJo27adcdVwV3iUGm3TZEmv5_4ShKBK7vxMjXQ0nC21Kc-wgvLBKkcOCUjLeDHzsKGxTgwTFYWK-EA8atlJEwQxoYpBxw_fchEfXJZ1-X5P69fFl2ZMoEM4FgXUTykBGaF0lJy1FxqbvnykyMmYnwk-B1T6DVbhgoGk8VLkddnG07fc9V1oclUCTcvTOgh3qz3Wx9SO3_2QT_QJXTvfe0')"></div>
+<div class="size-7 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-[10px] font-bold bg-slate-100">+3</div>
+</div>
+<button class="text-xs font-bold text-slate-500 hover:text-primary">Manage Backlog</button>
+</div>
+</div>
+</div>
+<!-- Document Library Updates -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h3 class="font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-indigo-500">history</span>
+                                Recent Document Updates
+                            </h3>
+<div class="flex gap-2">
+<button class="p-1 text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+<button class="p-1 text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+</div>
+</div>
+<div class="divide-y divide-slate-50 dark:divide-slate-800">
+<div class="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+<div class="size-10 bg-blue-50 dark:bg-blue-900/20 text-blue-600 rounded flex items-center justify-center">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Functional_Specs_V2.1.pdf</p>
+<p class="text-[11px] text-slate-500">Updated by Sarah Jenkins • 2h ago</p>
+</div>
+<div class="flex gap-2">
+<span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded">Internal</span>
+<span class="material-symbols-outlined text-slate-400 text-[18px]">more_vert</span>
+</div>
+</div>
+<div class="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+<div class="size-10 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 rounded flex items-center justify-center">
+<span class="material-symbols-outlined">table_chart</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Data_Mapping_Matrix.xlsx</p>
+<p class="text-[11px] text-slate-500">Updated by Mark T. • 5h ago</p>
+</div>
+<div class="flex gap-2">
+<span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded">Shared</span>
+<span class="material-symbols-outlined text-slate-400 text-[18px]">more_vert</span>
+</div>
+</div>
+<div class="p-4 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer">
+<div class="size-10 bg-amber-50 dark:bg-amber-900/20 text-amber-600 rounded flex items-center justify-center">
+<span class="material-symbols-outlined">draw</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Checkout_Flow_Diagram.png</p>
+<p class="text-[11px] text-slate-500">Updated by UX Team • 1d ago</p>
+</div>
+<div class="flex gap-2">
+<span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded">Draft</span>
+<span class="material-symbols-outlined text-slate-400 text-[18px]">more_vert</span>
+</div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50 text-center">
+<button class="text-xs font-bold text-primary">Go to Document Library</button>
+</div>
+</div>
+</div>
+<!-- Quick Actions / Flow Focus Section -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-6 bg-primary/10 dark:bg-primary/5 rounded-xl border border-primary/20 flex flex-col items-center text-center">
+<div class="size-12 rounded-full bg-primary text-white flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">auto_stories</span>
+</div>
+<h4 class="font-bold mb-1">Internal Wiki</h4>
+<p class="text-xs text-slate-500 mb-4">Access project knowledge base and guidelines.</p>
+<button class="w-full py-2 bg-primary text-white text-xs font-bold rounded-lg hover:bg-blue-700">Open Wiki</button>
+</div>
+<div class="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center">
+<div class="size-12 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">upload_file</span>
+</div>
+<h4 class="font-bold mb-1">Upload Documentation</h4>
+<p class="text-xs text-slate-500 mb-4">Add new BRDs, FSDs or wireframes to repository.</p>
+<button class="w-full py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600">Upload Files</button>
+</div>
+<div class="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center">
+<div class="size-12 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">contact_support</span>
+</div>
+<h4 class="font-bold mb-1">Need Clarification?</h4>
+<p class="text-xs text-slate-500 mb-4">Ping stakeholders for immediate requirement syncs.</p>
+<button class="w-full py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-bold rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600">Start Sync</button>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-auto p-8 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center text-xs text-slate-400">
+<p>© 2024 BA Central Management Systems. Project Alpha v4.2.0</p>
+<div class="flex gap-4 font-medium">
+<a class="hover:text-primary" href="#">System Status</a>
+<a class="hover:text-primary" href="#">Help Center</a>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

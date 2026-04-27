@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Budget &amp; Invoice Summary - PMO-MS Corporate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d101b] dark:text-white transition-colors duration-200">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7e9f3] dark:border-white/10 bg-white dark:bg-background-dark px-6 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-6">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V44Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-[#0d101b] dark:text-white text-lg font-bold leading-tight tracking-tight">PMO-MS Corporate</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#4c599a] dark:text-gray-400 text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary py-4" href="#">Projects</a>
+<a class="text-[#4c599a] dark:text-gray-400 text-sm font-medium hover:text-primary transition-colors" href="#">Resources</a>
+<a class="text-[#4c599a] dark:text-gray-400 text-sm font-medium hover:text-primary transition-colors" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<label class="hidden lg:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full overflow-hidden">
+<div class="text-[#4c599a] flex bg-[#e7e9f3] dark:bg-white/10 items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-[#e7e9f3] dark:bg-white/10 text-[#0d101b] dark:text-white focus:ring-0 h-full placeholder:text-[#4c599a] px-3 text-sm font-normal" placeholder="Search budgets..."/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#e7e9f3] dark:bg-white/10 text-[#0d101b] dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#e7e9f3] dark:bg-white/10 text-[#0d101b] dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzfkhG65gAAwxJzfsK5pMk1KCRwykrrnAagJhcJ9xvREevHzfrAfwXeCKO05f-63qzadh_aroeo57KFXRehi89C94dab5IgtKByKT5Pfr1x1lkfLHzhojXDqANozX6HYskOhhYm87RYlJo_6z585sL5Hump_v3hEAgR340psD_fsMdXyPK9Sw--mjgXxyYORM1pgpXJJH6u4qiGN-amNgZZXvcZlzwIbP48JU2CXReG1xPbaBn04ALjYhPwH9Hqvzm09-xbcjHmzQ");'></div>
+</div>
+</header>
+<div class="flex flex-1">
+<aside class="w-64 border-r border-[#e7e9f3] dark:border-white/10 bg-white dark:bg-background-dark hidden lg:flex flex-col justify-between p-4 sticky top-[65px] h-[calc(100vh-65px)] overflow-y-auto">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col px-2">
+<h1 class="text-[#0d101b] dark:text-white text-base font-bold">Project Alpha</h1>
+<p class="text-[#4c599a] text-xs font-medium uppercase tracking-wider mt-1">Enterprise ERP</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#4c599a] dark:text-gray-400 hover:bg-[#e7e9f3] dark:hover:bg-white/5 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 text-primary rounded-lg" href="#">
+<span class="material-symbols-outlined text-[22px] filled">account_balance_wallet</span>
+<span class="text-sm font-bold">Budget &amp; Finance</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#4c599a] dark:text-gray-400 hover:bg-[#e7e9f3] dark:hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">receipt_long</span>
+<span class="text-sm font-medium">Invoice Management</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#4c599a] dark:text-gray-400 hover:bg-[#e7e9f3] dark:hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">group</span>
+<span class="text-sm font-medium">Team Allocation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#4c599a] dark:text-gray-400 hover:bg-[#e7e9f3] dark:hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">warning</span>
+<span class="text-sm font-medium">Risk Management</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-3">
+<div class="p-3 bg-primary/5 rounded-lg border border-primary/10">
+<p class="text-xs text-[#4c599a] font-medium mb-1">Budget Burn Rate</p>
+<div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 65%;"></div>
+</div>
+<p class="text-xs text-primary font-bold mt-2">65% Exhausted</p>
+</div>
+<button class="flex w-full cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-md hover:bg-blue-700 transition-colors">
+<span class="truncate">Export Monthly Report</span>
+</button>
+</div>
+</aside>
+<main class="flex-1 overflow-x-hidden">
+<div class="p-6 lg:px-10 max-w-[1400px] mx-auto space-y-6">
+<nav class="flex items-center gap-2 text-sm">
+<a class="text-[#4c599a] hover:text-primary font-medium" href="#">Projects</a>
+<span class="text-gray-400">/</span>
+<a class="text-[#4c599a] hover:text-primary font-medium" href="#">Project Alpha</a>
+<span class="text-gray-400">/</span>
+<span class="text-primary font-bold">Project Budget &amp; Invoice Summary</span>
+</nav>
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h2 class="text-[#0d101b] dark:text-white text-4xl font-black tracking-tight">Project Financials</h2>
+<p class="text-[#4c599a] dark:text-gray-400 text-base">Budget oversight and integrated invoice tracking for FY24.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-white dark:bg-white/5 border border-[#e7e9f3] dark:border-white/10 text-[#0d101b] dark:text-white text-sm font-bold gap-2">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+<span>Filter</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold gap-2">
+<span class="material-symbols-outlined text-lg">description</span>
+<span>View All Invoices</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-white/5 border border-[#cfd3e7] dark:border-white/10 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-[#4c599a] dark:text-gray-400 text-sm font-semibold uppercase">Total Budget</p>
+<span class="material-symbols-outlined text-primary">account_balance</span>
+</div>
+<p class="text-[#0d101b] dark:text-white text-3xl font-black">$1,250,000</p>
+<div class="flex items-center gap-1 text-[#07883f] text-sm font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>Planned Baseline</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-white/5 border border-[#cfd3e7] dark:border-white/10 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-[#4c599a] dark:text-gray-400 text-sm font-semibold uppercase">Total Invoiced</p>
+<span class="material-symbols-outlined text-blue-500">receipt</span>
+</div>
+<p class="text-[#0d101b] dark:text-white text-3xl font-black">$720,450</p>
+<div class="flex items-center gap-1 text-primary text-sm font-bold">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>58% Invoiced</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-white/5 border border-[#cfd3e7] dark:border-white/10 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-[#4c599a] dark:text-gray-400 text-sm font-semibold uppercase">Actual Spend</p>
+<span class="material-symbols-outlined text-orange-500">payments</span>
+</div>
+<p class="text-[#0d101b] dark:text-white text-3xl font-black">$833,100</p>
+<div class="flex items-center gap-1 text-[#e73c08] text-sm font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+2.1% Over Baseline</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-white/5 border border-[#cfd3e7] dark:border-white/10 shadow-sm">
+<div class="flex justify-between items-start">
+<p class="text-[#4c599a] dark:text-gray-400 text-sm font-semibold uppercase">Remaining Funds</p>
+<span class="material-symbols-outlined text-green-500">savings</span>
+</div>
+<p class="text-[#0d101b] dark:text-white text-3xl font-black">$416,900</p>
+<div class="flex items-center gap-1 text-[#4c599a] text-sm font-bold">
+<span class="material-symbols-outlined text-sm">event</span>
+<span>FY24 Q4 Target</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6">
+<div class="flex flex-col gap-4">
+<div class="bg-white dark:bg-white/5 border border-[#e7e9f3] dark:border-white/10 rounded-xl overflow-hidden shadow-sm">
+<div class="p-4 border-b border-[#e7e9f3] dark:border-white/10 flex flex-col gap-3 bg-gray-50/50 dark:bg-white/5">
+<div class="flex justify-between items-center">
+<h3 class="text-base font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">hardware</span>
+                                        CapEx Details
+                                    </h3>
+<div class="flex items-center gap-4">
+<nav class="flex bg-gray-200/50 dark:bg-white/10 p-1 rounded-lg">
+<button class="px-3 py-1 text-xs font-bold rounded-md bg-white dark:bg-background-dark shadow-sm text-primary">Budget</button>
+<button class="px-3 py-1 text-xs font-medium rounded-md text-[#4c599a] dark:text-gray-400 hover:text-primary">Linked Invoices</button>
+</nav>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-end text-[10px] font-bold uppercase tracking-wider text-[#4c599a]">
+<span>Invoiced vs. Budgeted</span>
+<span class="text-primary">$385k / $450k (85%)</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-white/10 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 85.5%;"></div>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[#4c599a] dark:text-gray-400 text-xs font-bold uppercase tracking-wider bg-gray-50/30 dark:bg-transparent">
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Description</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Planned</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Invoiced</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Variance</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 font-medium">Server Infrastructure</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums">$200k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums">$215k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums text-red-500 font-bold">+$15k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold bg-red-100 text-red-700 uppercase">Warning</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 font-medium">Software Licenses</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums">$150k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums">$140k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums text-green-600 font-bold">-$10k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700 uppercase">On Track</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="bg-white dark:bg-white/5 border border-[#e7e9f3] dark:border-white/10 rounded-xl overflow-hidden shadow-sm">
+<div class="p-4 border-b border-[#e7e9f3] dark:border-white/10 flex flex-col gap-3 bg-gray-50/50 dark:bg-white/5">
+<div class="flex justify-between items-center">
+<h3 class="text-base font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">sync</span>
+                                        OpEx Details
+                                    </h3>
+<div class="flex items-center gap-4">
+<nav class="flex bg-gray-200/50 dark:bg-white/10 p-1 rounded-lg">
+<button class="px-3 py-1 text-xs font-bold rounded-md bg-white dark:bg-background-dark shadow-sm text-primary">Budget</button>
+<button class="px-3 py-1 text-xs font-medium rounded-md text-[#4c599a] dark:text-gray-400 hover:text-primary">Linked Invoices</button>
+</nav>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-end text-[10px] font-bold uppercase tracking-wider text-[#4c599a]">
+<span>Invoiced vs. Budgeted</span>
+<span class="text-primary">$335.4k / $382.9k (87.6%)</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-white/10 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 87.6%;"></div>
+</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[#4c599a] dark:text-gray-400 text-xs font-bold uppercase tracking-wider bg-gray-50/30 dark:bg-transparent">
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Description</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Monthly</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Invoiced YTD</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Variance</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 font-medium">Cloud Services (AWS)</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums">$12k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums">$82.9k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums text-red-500 font-bold">+$2.1k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold bg-blue-100 text-blue-700 uppercase">Review</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 font-medium">Contractor Salaries</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums">$45k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums">$270k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums text-gray-400">±$0k</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">
+<span class="px-2 py-1 rounded-full text-[10px] font-bold bg-green-100 text-green-700 uppercase">On Track</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-white/5 border border-[#e7e9f3] dark:border-white/10 rounded-xl overflow-hidden shadow-sm">
+<div class="p-4 border-b border-[#e7e9f3] dark:border-white/10 flex justify-between items-center bg-gray-50/50 dark:bg-white/5">
+<h3 class="text-base font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">receipt_long</span>
+                            Recent Linked Invoices
+                        </h3>
+<button class="flex items-center gap-1 text-primary text-xs font-bold hover:underline">
+                            View All Invoices Management
+                            <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[#4c599a] dark:text-gray-400 text-xs font-bold uppercase tracking-wider bg-gray-50/30 dark:bg-transparent">
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Invoice #</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Vendor</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Category</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Amount</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Date</th>
+<th class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Status</th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 font-bold">INV-2024-089</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Hardware Solutions Inc.</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10"><span class="px-2 py-1 rounded bg-gray-100 dark:bg-white/10 text-[10px] font-bold">CapEx</span></td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums font-bold">$45,200.00</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Oct 12, 2024</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">
+<span class="flex items-center gap-1.5 text-[#07883f] font-bold">
+<span class="size-1.5 rounded-full bg-[#07883f]"></span>
+                                            Paid
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-white/5">
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 font-bold">INV-2024-092</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Cloud Systems</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10"><span class="px-2 py-1 rounded bg-gray-100 dark:bg-white/10 text-[10px] font-bold">OpEx</span></td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10 tabular-nums font-bold">$12,400.00</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">Oct 15, 2024</td>
+<td class="px-4 py-3 border-b border-[#e7e9f3] dark:border-white/10">
+<span class="flex items-center gap-1.5 text-orange-500 font-bold">
+<span class="size-1.5 rounded-full bg-orange-500"></span>
+                                            Pending
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="bg-white dark:bg-white/5 border border-[#e7e9f3] dark:border-white/10 rounded-xl p-6 shadow-sm">
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+<div>
+<h3 class="text-lg font-bold">Financial Spend Trend</h3>
+<p class="text-sm text-[#4c599a] dark:text-gray-400">Cumulative actual spend vs. planned baseline over project duration.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-primary"></span>
+<span class="text-xs font-medium">Planned</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-3 rounded-full bg-orange-400"></span>
+<span class="text-xs font-medium">Actual</span>
+</div>
+</div>
+</div>
+<div class="h-64 w-full relative group">
+<div class="absolute bottom-0 left-0 w-full h-[1px] bg-gray-200 dark:bg-white/10"></div>
+<div class="absolute top-0 left-0 h-full w-[1px] bg-gray-200 dark:bg-white/10"></div>
+<div class="absolute w-full flex flex-col justify-between h-full py-4 opacity-50">
+<div class="border-t border-dashed border-gray-200 dark:border-white/5 w-full"></div>
+<div class="border-t border-dashed border-gray-200 dark:border-white/5 w-full"></div>
+<div class="border-t border-dashed border-gray-200 dark:border-white/5 w-full"></div>
+<div class="border-t border-dashed border-gray-200 dark:border-white/5 w-full"></div>
+</div>
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none">
+<path class="transition-all duration-300" d="M 0 200 L 150 180 L 300 160 L 450 140 L 600 120 L 750 100 L 900 80 L 1050 60" fill="none" stroke="#1337ec" stroke-linecap="round" stroke-width="3"></path>
+<path class="transition-all duration-300" d="M 0 200 L 150 190 L 300 175 L 450 135 L 600 125 L 750 115 L 900 70" fill="none" stroke="#fb923c" stroke-dasharray="1,0" stroke-linecap="round" stroke-width="3"></path>
+<circle cx="150" cy="190" fill="#fb923c" r="4" stroke="white" stroke-width="2"></circle>
+<circle cx="300" cy="175" fill="#fb923c" r="4" stroke="white" stroke-width="2"></circle>
+<circle cx="450" cy="135" fill="#fb923c" r="4" stroke="white" stroke-width="2"></circle>
+<circle cx="600" cy="125" fill="#fb923c" r="4" stroke="white" stroke-width="2"></circle>
+<circle cx="750" cy="115" fill="#fb923c" r="4" stroke="white" stroke-width="2"></circle>
+<circle cx="900" cy="70" fill="#fb923c" r="4" stroke="white" stroke-width="2"></circle>
+</svg>
+<div class="absolute -bottom-8 w-full flex justify-between text-[10px] font-bold text-[#4c599a] uppercase tracking-tighter">
+<span>Jan</span>
+<span>Feb</span>
+<span>Mar</span>
+<span>Apr</span>
+<span>May</span>
+<span>Jun</span>
+<span>Jul</span>
+<span>Aug</span>
+</div>
+</div>
+<div class="mt-12 flex justify-end">
+<button class="text-xs font-bold text-[#4c599a] hover:text-primary flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-sm">download</span>
+                            Download CSV Data
+                        </button>
+</div>
+</div>
+</div>
+<footer class="mt-12 p-8 border-t border-[#e7e9f3] dark:border-white/10 text-center">
+<p class="text-xs text-[#4c599a]">© 2024 PMO-MS Corporate Financial Intelligence. All financial data is encrypted and synced with SAP/ERP systems.</p>
+</footer>
+</main>
+</div>
+</div>
+
+</body></html>

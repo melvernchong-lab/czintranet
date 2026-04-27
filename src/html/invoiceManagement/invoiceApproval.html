@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Finance Approval with Gmail Automation - PMO-MS Corporate</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled {
+            font-variation-settings: 'FILL' 1;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d101b] dark:text-white transition-colors duration-200 h-screen overflow-hidden flex flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7e9f3] dark:border-white/10 bg-white dark:bg-background-dark px-6 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-6">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V44Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-[#0d101b] dark:text-white text-lg font-bold leading-tight tracking-tight">PMO-MS Corporate</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#4c599a] dark:text-gray-400 text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-[#4c599a] dark:text-gray-400 text-sm font-medium hover:text-primary transition-colors" href="#">Projects</a>
+<a class="text-[#4c599a] dark:text-gray-400 text-sm font-medium hover:text-primary transition-colors" href="#">Resources</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary py-4" href="#">Approvals</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#e7e9f3] dark:bg-white/10 text-[#0d101b] dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#e7e9f3] dark:bg-white/10 text-[#0d101b] dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAzwWK5Wszv2wK2m5Lco9sTQ0UO4R0qyPoAAwG_u7elHMFiu1ih2TVJHDugqYfJftM62qAf1DFbcbQnNh3dazN3MzcUFfGdyiCcrVdbAirW3jNlOmleyP4v2WKEuW65g8Rh6VMu8We8ixaA4fjdly8OPbfQHjSt-7WMQu1eovjNRhHCyUcg2EnPeGZyrrqsI_bNx7ov-n1Ym6UeEMuC2v0fNpCvUYNV4H-7W13hIk750pxikFpBd1CsGp5gMZ1yYv-eeIY8n-bBCgs");'></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<aside class="w-64 border-r border-[#e7e9f3] dark:border-white/10 bg-white dark:bg-background-dark hidden lg:flex flex-col p-4 overflow-y-auto">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col px-2">
+<h1 class="text-[#0d101b] dark:text-white text-base font-bold uppercase tracking-tight">Finance Ops</h1>
+<p class="text-[#4c599a] text-xs font-medium uppercase tracking-wider mt-1">Invoice Control</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary/10 text-primary rounded-lg" href="#">
+<span class="material-symbols-outlined text-[22px] filled">assignment_turned_in</span>
+<span class="text-sm font-bold">Approval Queue</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#4c599a] dark:text-gray-400 hover:bg-[#e7e9f3] dark:hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">history</span>
+<span class="text-sm font-medium">Approval History</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#4c599a] dark:text-gray-400 hover:bg-[#e7e9f3] dark:hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">receipt</span>
+<span class="text-sm font-medium">All Invoices</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#4c599a] dark:text-gray-400 hover:bg-[#e7e9f3] dark:hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">mail</span>
+<span class="text-sm font-medium">Email Templates</span>
+</a>
+</nav>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0">
+<div class="flex items-center gap-1 border-b border-[#e7e9f3] dark:border-white/10 bg-white dark:bg-background-dark px-6 py-1 overflow-x-auto no-scrollbar">
+<button class="flex items-center gap-2 px-4 py-3 border-b-2 border-primary text-primary text-sm font-bold whitespace-nowrap">
+                Pending My Approval <span class="bg-primary text-white px-1.5 py-0.5 rounded text-[10px]">5</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-[#4c599a] dark:text-gray-400 hover:text-primary text-sm font-medium whitespace-nowrap">
+                Awaiting Others <span class="bg-gray-200 dark:bg-white/10 text-gray-600 dark:text-gray-300 px-1.5 py-0.5 rounded text-[10px]">12</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-3 border-b-2 border-transparent text-[#4c599a] dark:text-gray-400 hover:text-primary text-sm font-medium whitespace-nowrap">
+                Approved Recently
+            </button>
+</div>
+<div class="flex-1 flex overflow-hidden">
+<div class="w-full lg:w-[420px] border-r border-[#e7e9f3] dark:border-white/10 flex flex-col bg-white dark:bg-background-dark">
+<div class="p-4 border-b border-[#e7e9f3] dark:border-white/10 flex items-center justify-between">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-white/5 border border-[#e7e9f3] dark:border-white/10 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="Search queue..." type="text"/>
+</div>
+<button class="ml-2 p-2 text-gray-400 hover:text-primary">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<div class="p-2 space-y-2">
+<div class="p-4 rounded-xl border-2 border-primary bg-primary/5 cursor-pointer relative group">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">INV-2024-089</span>
+<span class="text-xs font-semibold text-gray-500">2d ago</span>
+</div>
+<h4 class="text-sm font-bold text-[#0d101b] dark:text-white mb-1">Hardware Solutions Inc.</h4>
+<p class="text-xs text-[#4c599a] dark:text-gray-400 mb-3">Project Alpha - Enterprise ERP</p>
+<div class="flex items-center justify-between">
+<span class="text-base font-black text-[#0d101b] dark:text-white">$45,200.00</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-primary">auto_mode</span>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 uppercase">Automation Ready</span>
+</div>
+</div>
+</div>
+<div class="p-4 rounded-xl border border-[#e7e9f3] dark:border-white/10 hover:border-primary/50 transition-colors cursor-pointer bg-white dark:bg-white/5">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold text-[#4c599a] uppercase tracking-widest">INV-2024-092</span>
+<span class="text-xs font-semibold text-gray-500">4d ago</span>
+</div>
+<h4 class="text-sm font-bold text-[#0d101b] dark:text-white mb-1">Cloud Systems</h4>
+<p class="text-xs text-[#4c599a] dark:text-gray-400 mb-3">Project Beta - AWS Migration</p>
+<div class="flex items-center justify-between">
+<span class="text-base font-black text-[#0d101b] dark:text-white">$12,400.00</span>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 uppercase">PM Approval</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col bg-background-light dark:bg-background-dark overflow-hidden">
+<div class="bg-white dark:bg-background-dark border-b border-[#e7e9f3] dark:border-white/10 p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<h3 class="text-lg font-bold">INV-2024-089 Details</h3>
+<span class="px-2 py-1 rounded bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">Priority: High</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-white text-sm font-bold rounded-lg hover:bg-gray-200 transition-colors">Request Clarification</button>
+<button class="px-4 py-2 bg-red-50 text-red-600 border border-red-200 text-sm font-bold rounded-lg hover:bg-red-100 transition-colors">Reject</button>
+<button class="px-6 py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                            Approve &amp; Sync
+                        </button>
+</div>
+</div>
+<div class="flex-1 flex overflow-hidden p-6 gap-6">
+<div class="flex-1 flex flex-col gap-4 overflow-hidden">
+<div class="flex-1 bg-gray-500 rounded-xl flex items-center justify-center relative shadow-inner">
+<div class="w-[85%] h-[95%] bg-white shadow-2xl flex flex-col p-8 text-black overflow-y-auto custom-scrollbar">
+<div class="flex justify-between border-b pb-6 mb-6">
+<div>
+<h1 class="text-2xl font-black text-primary">INVOICE</h1>
+<p class="text-sm font-bold mt-2">Hardware Solutions Inc.</p>
+<p class="text-[10px] text-gray-500">123 Industrial Way, Silicon Valley, CA</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-bold text-gray-400">INVOICE #</p>
+<p class="text-lg font-bold">INV-2024-089</p>
+<p class="text-[10px] font-bold text-gray-400 mt-2">DATE</p>
+<p class="text-sm">Oct 12, 2024</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="grid grid-cols-4 text-[10px] font-bold border-b pb-2 text-gray-400">
+<span class="col-span-2">DESCRIPTION</span>
+<span class="text-center">QTY</span>
+<span class="text-right">TOTAL</span>
+</div>
+<div class="grid grid-cols-4 text-xs py-1">
+<span class="col-span-2 font-medium">Enterprise Rack Server (X-900)</span>
+<span class="text-center">2</span>
+<span class="text-right font-bold">$34,000.00</span>
+</div>
+<div class="grid grid-cols-4 text-xs py-1">
+<span class="col-span-2 font-medium">Network Switch Catalyst 9k</span>
+<span class="text-center">1</span>
+<span class="text-right font-bold">$11,200.00</span>
+</div>
+</div>
+<div class="mt-auto pt-6 border-t flex flex-col items-end">
+<div class="flex gap-12 text-sm">
+<span class="font-bold text-gray-400">SUBTOTAL</span>
+<span class="font-bold">$45,200.00</span>
+</div>
+<div class="flex gap-12 text-lg font-black text-primary mt-2">
+<span>TOTAL DUE</span>
+<span>$45,200.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-[380px] flex flex-col gap-6 overflow-y-auto custom-scrollbar">
+<div class="bg-white dark:bg-white/5 border border-[#e7e9f3] dark:border-white/10 rounded-xl p-5 space-y-4">
+<h4 class="text-sm font-bold border-b border-[#e7e9f3] dark:border-white/10 pb-2">Invoice Summary</h4>
+<div class="grid grid-cols-2 gap-y-3">
+<div>
+<p class="text-[10px] text-[#4c599a] font-bold uppercase">Vendor</p>
+<p class="text-sm font-medium">Hardware Solutions Inc.</p>
+</div>
+<div>
+<p class="text-[10px] text-[#4c599a] font-bold uppercase">Due Date</p>
+<p class="text-sm font-medium">Nov 12, 2024</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-white/5 border border-[#e7e9f3] dark:border-white/10 rounded-xl p-5">
+<h4 class="text-sm font-bold mb-6">Approval Workflow</h4>
+<div class="relative space-y-6">
+<div class="absolute left-[13px] top-1 bottom-1 w-[2px] bg-gray-200 dark:bg-white/10"></div>
+<div class="relative flex items-center gap-4">
+<div class="size-7 rounded-full bg-green-500 text-white flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<div>
+<p class="text-sm font-bold">PM Approval</p>
+<p class="text-xs text-gray-500">Sarah Johnson • Approved 2d ago</p>
+</div>
+</div>
+<div class="relative flex items-center gap-4">
+<div class="size-7 rounded-full bg-green-500 text-white flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<div>
+<p class="text-sm font-bold">Finance Review</p>
+<p class="text-xs text-gray-500">Finance Team • Cleared 1d ago</p>
+</div>
+</div>
+<div class="relative flex items-center gap-4">
+<div class="size-7 rounded-full bg-primary text-white flex items-center justify-center z-10 animate-pulse">
+<span class="material-symbols-outlined text-sm">pending</span>
+</div>
+<div>
+<p class="text-sm font-bold text-primary">Director Approval</p>
+<p class="text-xs text-primary/80 font-medium">Awaiting your signature</p>
+</div>
+</div>
+<div class="relative flex items-start gap-4">
+<div class="size-7 rounded-full bg-gray-100 dark:bg-white/10 border border-dashed border-primary/50 text-primary flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2 mb-1">
+<p class="text-sm font-bold">Auto-Email to Client</p>
+<div class="flex items-center gap-1 bg-red-50 px-1.5 py-0.5 rounded border border-red-100">
+<svg class="size-3" fill="#ea4335" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.387l-9 6.463-9-6.463V21H1.5C.65 21 0 20.35 0 19.5v-15c0-.425.162-.8.431-1.068C.7 3.16 1.075 3 1.5 3H2l10 7.167L22 3h.5c.425 0 .8.162 1.069.432.27.268.431.643.431 1.068z"></path></svg>
+<span class="text-[8px] font-bold text-red-600 uppercase">Gmail</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full uppercase">Pending Approval</span>
+<button class="flex items-center gap-1 text-[10px] font-bold text-primary hover:underline group">
+                                                Template Preview
+                                                <span class="material-symbols-outlined text-[12px] group-hover:translate-x-0.5 transition-transform">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<div class="relative flex items-center gap-4 opacity-30">
+<div class="size-7 rounded-full bg-gray-200 dark:bg-white/10 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-sm">payments</span>
+</div>
+<div>
+<p class="text-sm font-bold">Payment Disbursement</p>
+<p class="text-xs text-gray-500">Final Step</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-white/5 border border-[#e7e9f3] dark:border-white/10 rounded-xl flex flex-col overflow-hidden max-h-[240px]">
+<div class="p-4 border-b border-[#e7e9f3] dark:border-white/10 bg-gray-50/50 dark:bg-white/5 flex justify-between items-center">
+<h4 class="text-sm font-bold">Contextual Discussion</h4>
+<span class="bg-gray-200 dark:bg-white/10 text-[10px] px-2 py-0.5 rounded-full font-bold">3</span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+<div class="flex gap-3">
+<div class="size-6 rounded-full bg-primary/20 flex-shrink-0 text-[10px] flex items-center justify-center font-bold">SJ</div>
+<div class="bg-gray-100 dark:bg-white/10 p-2 rounded-lg">
+<p class="text-xs font-bold mb-1">Sarah Johnson</p>
+<p class="text-xs text-[#4c599a] dark:text-gray-300">Quote matches the initial proposal.</p>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="size-6 rounded-full bg-orange-500/20 flex-shrink-0 text-[10px] flex items-center justify-center font-bold">FM</div>
+<div class="bg-gray-100 dark:bg-white/10 p-2 rounded-lg">
+<p class="text-xs font-bold mb-1">Finance Mgr</p>
+<p class="text-xs text-[#4c599a] dark:text-gray-300">Email automation template confirmed.</p>
+</div>
+</div>
+</div>
+<div class="p-3 bg-white dark:bg-background-dark border-t border-[#e7e9f3] dark:border-white/10">
+<div class="flex gap-2">
+<input class="flex-1 text-xs border-none bg-gray-50 dark:bg-white/5 rounded-lg focus:ring-1 focus:ring-primary px-3 h-8" placeholder="Add a comment..." type="text"/>
+<button class="bg-primary text-white p-1 rounded-lg">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

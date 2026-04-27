@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mantis Issue Dashboard - PMO Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d101b] dark:text-white font-display">
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="w-64 flex-shrink-0 border-r border-[#cfd3e7] dark:border-gray-800 bg-background-light dark:bg-background-dark">
+<div class="flex h-full flex-col justify-between p-4">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col px-3">
+<h1 class="text-[#0d101b] dark:text-white text-lg font-bold leading-normal">PMO Management</h1>
+<p class="text-[#4c599a] dark:text-gray-400 text-xs font-normal leading-normal">Mantis Integrated</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-[#4c599a] hover:bg-[#e7e9f3] dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#4c599a] hover:bg-[#e7e9f3] dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<p class="text-sm font-medium">Projects</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined filled-icon">bug_report</span>
+<p class="text-sm font-semibold">Issues</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-[#4c599a] hover:bg-[#e7e9f3] dark:hover:bg-gray-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4 mt-auto pt-4 border-t border-[#cfd3e7] dark:border-gray-800">
+<button class="flex w-full items-center justify-center gap-2 rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold shadow-sm hover:bg-blue-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="truncate">New Issue</span>
+</button>
+<div class="flex items-center gap-3 px-3">
+<div class="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xs">JD</div>
+<div class="overflow-hidden">
+<p class="text-xs font-bold truncate">John Doe</p>
+<p class="text-[10px] text-[#4c599a] truncate">Admin Account</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto">
+<div class="max-w-[1200px] mx-auto p-8">
+<!-- Breadcrumbs & Header -->
+<div class="flex flex-col gap-2 mb-6">
+<nav class="flex items-center gap-2 text-sm">
+<a class="text-[#4c599a] dark:text-gray-400 font-medium hover:underline" href="#">PMO</a>
+<span class="text-[#4c599a] dark:text-gray-500">/</span>
+<span class="text-[#0d101b] dark:text-white font-medium">Issues Dashboard</span>
+</nav>
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-col">
+<h2 class="text-[#0d101b] dark:text-white text-3xl font-black tracking-tight">Mantis Issue Dashboard</h2>
+<p class="text-[#4c599a] dark:text-gray-400 text-sm">Last synced: 2 minutes ago</p>
+</div>
+<button class="flex items-center gap-2 rounded-lg h-10 px-4 bg-[#e7e9f3] dark:bg-gray-800 text-[#0d101b] dark:text-white text-sm font-bold border border-[#cfd3e7] dark:border-gray-700 hover:bg-[#d8dbe9] transition-colors">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+<span>Sync Now</span>
+</button>
+</div>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-gray-900 border border-[#cfd3e7] dark:border-gray-800 shadow-sm">
+<p class="text-[#4c599a] dark:text-gray-400 text-sm font-medium">Total Open Issues</p>
+<div class="flex items-baseline gap-2">
+<p class="text-[#0d101b] dark:text-white text-3xl font-bold">142</p>
+<p class="text-[#e73c08] text-xs font-bold">-5%</p>
+</div>
+<div class="mt-2 h-1 w-full bg-[#f0f2f9] dark:bg-gray-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 65%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-gray-900 border border-[#cfd3e7] dark:border-gray-800 shadow-sm">
+<p class="text-[#4c599a] dark:text-gray-400 text-sm font-medium">Critical/Blockers</p>
+<div class="flex items-baseline gap-2">
+<p class="text-red-600 text-3xl font-bold">12</p>
+<p class="text-[#07883f] text-xs font-bold">+2%</p>
+</div>
+<div class="mt-2 h-1 w-full bg-[#f0f2f9] dark:bg-gray-800 rounded-full overflow-hidden">
+<div class="h-full bg-red-500" style="width: 15%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-gray-900 border border-[#cfd3e7] dark:border-gray-800 shadow-sm">
+<p class="text-[#4c599a] dark:text-gray-400 text-sm font-medium">Avg. Resolution Time</p>
+<div class="flex items-baseline gap-2">
+<p class="text-[#0d101b] dark:text-white text-3xl font-bold">3.2 Days</p>
+<p class="text-[#e73c08] text-xs font-bold">-10%</p>
+</div>
+<div class="mt-2 h-1 w-full bg-[#f0f2f9] dark:bg-gray-800 rounded-full overflow-hidden">
+<div class="h-full bg-green-500" style="width: 45%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-gray-900 border border-[#cfd3e7] dark:border-gray-800 shadow-sm relative overflow-hidden">
+<div class="z-10">
+<p class="text-[#4c599a] dark:text-gray-400 text-sm font-medium">Severity Split</p>
+<p class="text-[#0d101b] dark:text-white text-3xl font-bold">High</p>
+<p class="text-[#4c599a] dark:text-gray-500 text-xs font-medium">Most frequent</p>
+</div>
+<!-- Miniature Chart Mockup -->
+<div class="absolute right-[-10px] bottom-[-10px] opacity-20 dark:opacity-40">
+<span class="material-symbols-outlined text-[80px] text-primary">pie_chart</span>
+</div>
+</div>
+</div>
+<!-- Filters & Controls -->
+<div class="flex flex-wrap items-center justify-between gap-4 mb-4 bg-white dark:bg-gray-900 p-4 rounded-xl border border-[#cfd3e7] dark:border-gray-800">
+<div class="flex flex-wrap items-center gap-3">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-gray-400 text-[20px]">search</span>
+<input class="pl-10 pr-4 py-2 bg-background-light dark:bg-gray-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/50" placeholder="Search issues..." type="text"/>
+</div>
+<select class="bg-background-light dark:bg-gray-800 border-none rounded-lg text-sm font-medium py-2 pl-3 pr-8 focus:ring-2 focus:ring-primary/50">
+<option>All Projects</option>
+<option>Cloud Infrastructure</option>
+<option>Mobile App v2</option>
+<option>Data Warehouse</option>
+</select>
+<select class="bg-background-light dark:bg-gray-800 border-none rounded-lg text-sm font-medium py-2 pl-3 pr-8 focus:ring-2 focus:ring-primary/50">
+<option>Severity: All</option>
+<option>Critical</option>
+<option>Major</option>
+<option>Minor</option>
+</select>
+<select class="bg-background-light dark:bg-gray-800 border-none rounded-lg text-sm font-medium py-2 pl-3 pr-8 focus:ring-2 focus:ring-primary/50">
+<option>Assignee: All</option>
+<option>My Issues</option>
+<option>Unassigned</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<!-- Data Table -->
+<div class="overflow-hidden rounded-xl border border-[#cfd3e7] dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-background-light dark:bg-gray-800/50 border-bottom border-[#cfd3e7] dark:border-gray-800">
+<th class="px-4 py-3 text-xs font-bold text-[#4c599a] uppercase tracking-wider">ID</th>
+<th class="px-4 py-3 text-xs font-bold text-[#4c599a] uppercase tracking-wider">Severity</th>
+<th class="px-4 py-3 text-xs font-bold text-[#4c599a] uppercase tracking-wider">Subject</th>
+<th class="px-4 py-3 text-xs font-bold text-[#4c599a] uppercase tracking-wider">Status</th>
+<th class="px-4 py-3 text-xs font-bold text-[#4c599a] uppercase tracking-wider">Assigned To</th>
+<th class="px-4 py-3 text-xs font-bold text-[#4c599a] uppercase tracking-wider">Project</th>
+<th class="px-4 py-3 text-xs font-bold text-[#4c599a] uppercase tracking-wider"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#cfd3e7] dark:divide-gray-800">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-4 py-3 text-sm font-bold text-primary">#4502</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-red-600"></span>
+<span class="text-sm font-medium text-red-600">Critical</span>
+</div>
+</td>
+<td class="px-4 py-3 text-sm font-medium text-[#0d101b] dark:text-gray-200 truncate max-w-[200px]">Auth: Loop on redirect for mobile logins</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Resolved</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+<img alt="User avatar" data-alt="Avatar of John Doe" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmSlV5gascyfVXjL_IpfMD2iM2NVV7JXVcUpgKl3VoC6tGRhV8abfzX4Fst4JClhVa0NNlo29nL7mttzd5fcSvb3D0TKpSeLWZQhcLU-iuWbk35VjjMaZfCrjH3AJwPhjg5c8NhX5WJK2B8v2Xk44jrbfngsls5JyNxWD7QBGmAJG-8AWE5HD7XmqETBnjVsic5A9t-IiKkgG2mmFMInop7gl_WOLF3Zqd8aEksI8x4Mch0aZaDecCm7-vs4Z3-JBd0yfKyOfofzg"/>
+</div>
+<span class="text-sm">John Doe</span>
+</div>
+</td>
+<td class="px-4 py-3 text-sm text-[#4c599a] dark:text-gray-400">Mobile App v2</td>
+<td class="px-4 py-3 text-right">
+<button class="material-symbols-outlined text-gray-400 hover:text-primary">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-4 py-3 text-sm font-bold text-primary">#4498</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-orange-500"></span>
+<span class="text-sm font-medium text-orange-500">Major</span>
+</div>
+</td>
+<td class="px-4 py-3 text-sm font-medium text-[#0d101b] dark:text-gray-200 truncate max-w-[200px]">DB: Memory leak in query aggregator</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-primary/20 dark:text-primary">New</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold">SM</div>
+<span class="text-sm">Sara Miles</span>
+</div>
+</td>
+<td class="px-4 py-3 text-sm text-[#4c599a] dark:text-gray-400">Infrastructure</td>
+<td class="px-4 py-3 text-right">
+<button class="material-symbols-outlined text-gray-400 hover:text-primary">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-4 py-3 text-sm font-bold text-primary">#4485</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-blue-400"></span>
+<span class="text-sm font-medium text-blue-400">Minor</span>
+</div>
+</td>
+<td class="px-4 py-3 text-sm font-medium text-[#0d101b] dark:text-gray-200 truncate max-w-[200px]">UI: Typo in user settings header</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400">Feedback</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold">AL</div>
+<span class="text-sm">Alex Lee</span>
+</div>
+</td>
+<td class="px-4 py-3 text-sm text-[#4c599a] dark:text-gray-400">Core UX</td>
+<td class="px-4 py-3 text-right">
+<button class="material-symbols-outlined text-gray-400 hover:text-primary">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-4 py-3 text-sm font-bold text-primary">#4482</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-red-600"></span>
+<span class="text-sm font-medium text-red-600">Blocker</span>
+</div>
+</td>
+<td class="px-4 py-3 text-sm font-medium text-[#0d101b] dark:text-gray-200 truncate max-w-[200px]">API: Endpoint /v1/auth returning 500</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">Assigned</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2 text-gray-400">
+<span class="material-symbols-outlined text-[18px]">person_off</span>
+<span class="text-sm italic">Unassigned</span>
+</div>
+</td>
+<td class="px-4 py-3 text-sm text-[#4c599a] dark:text-gray-400">Security API</td>
+<td class="px-4 py-3 text-right">
+<button class="material-symbols-outlined text-gray-400 hover:text-primary">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/30 transition-colors">
+<td class="px-4 py-3 text-sm font-bold text-primary">#4479</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-gray-400"></span>
+<span class="text-sm font-medium text-gray-500">Low</span>
+</div>
+</td>
+<td class="px-4 py-3 text-sm font-medium text-[#0d101b] dark:text-gray-200 truncate max-w-[200px]">Export: CSV format tweak for reports</td>
+<td class="px-4 py-3">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-400">Closed</span>
+</td>
+<td class="px-4 py-3">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-[10px] font-bold">JD</div>
+<span class="text-sm">John Doe</span>
+</div>
+</td>
+<td class="px-4 py-3 text-sm text-[#4c599a] dark:text-gray-400">Reporting Engine</td>
+<td class="px-4 py-3 text-right">
+<button class="material-symbols-outlined text-gray-400 hover:text-primary">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Pagination Mockup -->
+<div class="flex items-center justify-between px-4 py-3 bg-background-light dark:bg-gray-800/50 border-t border-[#cfd3e7] dark:border-gray-800">
+<p class="text-sm text-[#4c599a] dark:text-gray-400">Showing 1 to 5 of 142 results</p>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-400"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="px-3 py-1 text-sm font-bold bg-primary text-white rounded">1</button>
+<button class="px-3 py-1 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded">2</button>
+<button class="px-3 py-1 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 rounded">3</button>
+<button class="p-1 rounded hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-400"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

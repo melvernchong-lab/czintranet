@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wiki &amp; Document Library - PMO Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .sidebar-item-active { background-color: rgba(19, 55, 236, 0.1); color: #1337ec; border-right: 3px solid #1337ec; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark/80 backdrop-blur-md px-6 py-3 flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-symbols-outlined block">account_tree</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">PMO <span class="text-primary font-black">Sync</span></h1>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Projects</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Resources</a>
+<a class="text-sm font-medium text-primary border-b-2 border-primary py-4 -mb-4" href="#">Knowledge</a>
+</div>
+</div>
+<div class="flex-1 max-w-xl px-12">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Search across all documents and wiki content..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark"></span>
+</button>
+<button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-slate-200" data-alt="User profile avatar">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtiRtVfQmGXkOKDCF0a8wr0R5zxz9g1gmb8S15pswplEriCx0Cg-5wRToaeYOd0VTyuz7hHMJDk5d2aCHLfXKs-V8tHRm03A8GhR9pPDsNI0-utKxudYUQ0940KMxEzKRwy0O0C_Fw8lnP19F84yrQy3iIy6oHuYLDQQkA_x17-7gBV6YORawnTWXWm7BGBDfosMObcRnHsmUukmq24I1vZEG1r7L_biiFJyxMerxJ7w10fVZEObXr38pwcqZF8WUWZBn2c6kOJ68"/>
+</div>
+</div>
+</header>
+<div class="flex h-[calc(100vh-64px)] overflow-hidden">
+<!-- Left Sidebar: Library Navigator -->
+<aside class="w-72 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark flex flex-col">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h2 class="font-bold text-slate-900 dark:text-white">Library Navigator</h2>
+<p class="text-xs text-slate-500">Corporate Repository</p>
+</div>
+<button class="text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">sort</span>
+</button>
+</div>
+<div class="space-y-6">
+<div>
+<p class="text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-3 px-3">Wiki Spaces</p>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg sidebar-item-active transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">book</span>
+<span class="text-sm font-medium">Wiki Home</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-sm font-medium">Project Charters</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span class="text-sm font-medium">Best Practices</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+<span class="text-sm font-medium">Onboarding</span>
+</a>
+</nav>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold tracking-wider text-slate-400 mb-3 px-3">Document Folders</p>
+<nav class="space-y-1">
+<div class="flex flex-col gap-1">
+<button class="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+<span class="text-sm font-medium">Finance Reports</span>
+</div>
+<span class="material-symbols-outlined text-[16px] group-hover:rotate-90 transition-transform">chevron_right</span>
+</button>
+<button class="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+<span class="text-sm font-medium">Legal Docs</span>
+</div>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+<button class="flex items-center justify-between w-full px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-all group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+<span class="text-sm font-medium">Archive</span>
+</div>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</nav>
+</div>
+</div>
+</div>
+<div class="mt-auto p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="bg-primary/5 rounded-xl p-4">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-primary text-[18px]">cloud_done</span>
+<p class="text-xs font-bold text-primary uppercase tracking-wide">Storage Used</p>
+</div>
+<div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[65%]"></div>
+</div>
+<p class="text-[10px] text-slate-500 mt-2">12.4 GB of 20 GB used</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark scroll-smooth">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Page Heading & Breadcrumbs -->
+<div class="mb-8">
+<nav class="flex items-center gap-2 text-sm text-slate-500 mb-4">
+<a class="hover:text-primary transition-colors" href="#">Knowledge Base</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Wiki Spaces</a>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-slate-900 dark:text-white font-medium">Best Practices</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Wiki &amp; Document Library</h1>
+<p class="text-slate-500 mt-1">Manage project documentation, standards, and organizational knowledge.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 p-1">
+<button class="flex items-center justify-center p-2 rounded bg-slate-100 dark:bg-slate-700 text-primary">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="flex items-center justify-center p-2 rounded text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined">list</span>
+</button>
+</div>
+<div class="relative group">
+<button class="bg-primary text-white px-5 py-2.5 rounded-lg font-bold flex items-center gap-2 hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+<span>Create New</span>
+<span class="material-symbols-outlined text-[18px] border-l border-white/20 pl-1">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Recently Updated Section -->
+<div class="mb-10">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-500">history</span>
+                            Recently Updated
+                        </h2>
+<a class="text-xs font-bold text-primary hover:underline uppercase tracking-wide" href="#">View History</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-lg bg-blue-100 text-blue-600">
+<span class="material-symbols-outlined">edit_document</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-slate-500">WIKI</span>
+</div>
+<h3 class="font-bold text-sm mb-1 line-clamp-1 group-hover:text-primary transition-colors">Project Kickoff Framework</h3>
+<p class="text-[11px] text-slate-400 mb-4">Updated 2h ago by Sarah J.</p>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200" data-alt="User collaborator avatar"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 bg-slate-300" data-alt="User collaborator avatar"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 bg-primary flex items-center justify-center text-[8px] text-white font-bold">+3</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-lg bg-red-100 text-red-600">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-slate-500">PDF</span>
+</div>
+<h3 class="font-bold text-sm mb-1 line-clamp-1 group-hover:text-primary transition-colors">Q3 Risk Assessment.pdf</h3>
+<p class="text-[11px] text-slate-400 mb-4">Updated 5h ago by Mark T.</p>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200" data-alt="User collaborator avatar"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-lg bg-emerald-100 text-emerald-600">
+<span class="material-symbols-outlined">table_chart</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-slate-500">XLSX</span>
+</div>
+<h3 class="font-bold text-sm mb-1 line-clamp-1 group-hover:text-primary transition-colors">Resource Utilization 2024</h3>
+<p class="text-[11px] text-slate-400 mb-4">Updated 1d ago by Elena R.</p>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200" data-alt="User collaborator avatar"></div>
+<div class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 bg-slate-300" data-alt="User collaborator avatar"></div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-md transition-all group cursor-pointer">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-lg bg-amber-100 text-amber-600">
+<span class="material-symbols-outlined">article</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-slate-500">DOCX</span>
+</div>
+<h3 class="font-bold text-sm mb-1 line-clamp-1 group-hover:text-primary transition-colors">Standard Operating Proc...</h3>
+<p class="text-[11px] text-slate-400 mb-4">Updated 2d ago by Sarah J.</p>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white dark:border-slate-800 bg-slate-300" data-alt="User collaborator avatar"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Document Table Section -->
+<div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
+<h2 class="font-bold">All Documents &amp; Pages</h2>
+<div class="flex items-center gap-2">
+<button class="text-slate-400 hover:text-slate-600 px-2 py-1 text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                                Filter
+                            </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-slate-900/50">
+<tr>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Name</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Type</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Last Modified</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Modified By</th>
+<th class="px-6 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+<!-- Table Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-500">article</span>
+<span class="text-sm font-semibold">Technical Architecture Review v2</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-[10px] font-bold">WIKI PAGE</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500">Oct 24, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200 overflow-hidden" data-alt="User avatar">
+<img alt="Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs6EeMvlkgTPIm_Ghc27A-TYb_CyiUweJ4G1vQ2zt6KgwxFRIbZ6CxTU-vw0HcKKaTqpAc2XiLOirNIwBL8QlqqyNuZxhponU9YPdFzS0qc_brfVEGwHPWJcN6K_hAHSRU7H6uz2bcQTu-mnAIwyrJICxzT_25qUFC4oJWzYB7vVJApRza_k6bZIUGIzRCsKXNOloZLwF1HAPvYZVryamsK4nm5WRV6Jm67qDd1Jgw4J9WaUV0gAVrPHwi5nK39cB32BfvRhnQFvE"/>
+</div>
+<span class="text-sm">Sarah Jenkins</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-[20px]">share</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-red-500">picture_as_pdf</span>
+<span class="text-sm font-semibold">Change Management Protocol</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold">PDF</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500">Oct 22, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200 overflow-hidden" data-alt="User avatar">
+<img alt="Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCE8vQSTCxUBv67BBegugOWjvrv6YLuPa1ni490wxh-3Ko_Q2wfQxDxWd5fFe-JlC8z5fLB3oUSTmcHCNROWAq5KPYsidTDDAadNsniCgAAZQOJvyZbuxBfjREBgqACZ7aA7u2a-jBH9XEF0rcmokqLWVp4QO2btNPsxRPk3aSDRxIiX3y33BWFVoM7sZl__ntCHGcudcLw5_647eyE5MJ-uqWlyZLcS_HUAzGT3_93xEl1Vo5QjcE9AhVWPtjhpNdXwhyXAjhrwxA"/>
+</div>
+<span class="text-sm">Mark Thompson</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-[20px]">download</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-[20px]">share</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Table Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-500">description</span>
+<span class="text-sm font-semibold">Stakeholder Engagement Plan</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-slate-500 text-[10px] font-bold">DOCX</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-500">Oct 20, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200 overflow-hidden" data-alt="User avatar">
+<img alt="Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC_GOHiWhsKRUFIuMk41kZhde7s9zrM0AHnA9upkBQc7YOjRdz-ZWO8ZnyGEcoDhfu8FciX5q6MRYGVpLNbyIj48u2VNkEPVNuKRF0FSO2PFoK1O9zPk6MJ7daUsdPg3HThbcMmwvGYymFcevryGepLMK4UIjM1AcEv6yAUlPr9TcppizKZkTJx6sqkEwUDR-qBoCiLw2m4B5KgS7wx_00B0lhxBfpPdgR-mNSy5vR3mKYnXyqGrngN6OtXPqUjq1gDmADOkhjZkM"/>
+</div>
+<span class="text-sm">Elena Rodriguez</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-[20px]">share</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</div>
+</td>
+</tr>
+<!-- Table Row 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors group cursor-pointer">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">lock</span>
+<span class="text-sm font-semibold text-slate-400">Confidential Budgeting Rules</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-slate-400 text-[10px] font-bold">LOCKED</span>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">Oct 19, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-slate-200 overflow-hidden" data-alt="User avatar">
+<img alt="Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5MUDjnQBEok6C59pqhKsI1bglA0V-wgHbRJJQZ-iGleX4vT4X1ZwMB311t1j90yC1rjA8vLoxct7D0zGZoIhmzK_mk9FGZy_RENFkMRneLEvgzZ1W37fY_0gxBGa9MGvTZqhTdreWvodDJ23xl6VPfdexvM0pcPKwG7UGNkiYGIiWk8xZYEmGxH169vUos6XcmhuoON-6GAdOSJdcmt5JOeo4Ry2XZXTmcYKf2gj6D3N5uuY-od2AstSGsu1c3C1n4bNC5A8Rnig"/>
+</div>
+<span class="text-sm text-slate-400">Admin Only</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-1 text-slate-300 cursor-not-allowed"><span class="material-symbols-outlined text-[20px]">key</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 flex items-center justify-between">
+<p class="text-xs text-slate-500">Showing 4 of 24 items</p>
+<div class="flex items-center gap-2">
+<button class="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

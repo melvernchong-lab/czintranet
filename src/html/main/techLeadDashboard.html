@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tech Lead Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                        "card-dark": "#161b30",
+                        "border-dark": "#232948",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<div class="flex flex-col h-full min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark bg-background-dark px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-lg">terminal</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Tech Management Console</h2>
+</div>
+<div class="flex items-center gap-9">
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Codebase</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sprints</a>
+<a class="text-white text-sm font-medium leading-normal border-b-2 border-primary pb-1" href="#">Quality</a>
+<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Team</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-[#929bc9] flex border-none bg-border-dark items-center justify-center pl-4 rounded-l-lg" data-icon="MagnifyingGlass">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-border-dark text-white focus:ring-0 h-full placeholder:text-[#929bc9] px-4 rounded-r-lg pl-2 text-sm font-normal" placeholder="Search codebase or tickets..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-border-dark text-white hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-border-dark text-white hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="flex items-center gap-3 pl-4 border-l border-border-dark">
+<div class="text-right">
+<p class="text-xs font-bold text-white">Alex Rivera</p>
+<p class="text-[10px] text-primary uppercase tracking-wider">Tech Lead</p>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border-2 border-primary/40" data-alt="Profile picture of Tech Lead Alex Rivera" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAxFrHeDTGa-UcGiujDfACinZeP7HM6Ee8D4kOK9JZsDpz8-10_frkBVDc7555poH7BzmAcjesS9WLBbrevr83iarmS7RLMkljKn_zAbrU9Y0vvUibS1EPHvYJq6IIv6vtyXmRqWl_6B7cfIAzN9WLrnt16rO5t6pTQwWij3m8f2qxxHVCUxU2vrq1Kxsh-jDEUPQoeCPgUOUvSL1B9rVcNsHKNAk3OXLtwv0RF5KoHUGiaW0wWKySGheNb98axMtnkW8V4G4iryfM");'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Side Navigation -->
+<aside class="w-64 flex-shrink-0 bg-background-dark border-r border-border-dark p-4 flex flex-col justify-between">
+<div class="flex flex-col gap-6">
+<div class="flex flex-col px-3 py-2">
+<h1 class="text-white text-base font-bold leading-normal flex items-center gap-2">
+<span class="size-2 rounded-full bg-green-500 animate-pulse"></span>
+                            Project Alpha
+                        </h1>
+<p class="text-[#929bc9] text-xs font-normal">Active Sprint: 24 (Week 2)</p>
+</div>
+<nav class="flex flex-col gap-1">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary text-white cursor-pointer">
+<span class="material-symbols-outlined" data-icon="Layout">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#929bc9] hover:bg-border-dark hover:text-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="Bug">bug_report</span>
+<p class="text-sm font-medium">Mantis Bugs</p>
+<span class="ml-auto text-[10px] bg-red-500/20 text-red-500 px-1.5 py-0.5 rounded-full font-bold">12</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#929bc9] hover:bg-border-dark hover:text-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="GitPullRequest">rebase</span>
+<p class="text-sm font-medium">Git PRs</p>
+<span class="ml-auto text-[10px] bg-primary/20 text-primary px-1.5 py-0.5 rounded-full font-bold">8</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#929bc9] hover:bg-border-dark hover:text-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="ChartBar">monitoring</span>
+<p class="text-sm font-medium">Quality Metrics</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#929bc9] hover:bg-border-dark hover:text-white cursor-pointer transition-colors">
+<span class="material-symbols-outlined" data-icon="Cpu">memory</span>
+<p class="text-sm font-medium">Integrations</p>
+</div>
+</nav>
+<div class="mt-4 border-t border-border-dark pt-4 px-3">
+<p class="text-[10px] uppercase font-bold text-[#929bc9] tracking-widest mb-3">Health Status</p>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between text-xs">
+<span class="text-[#929bc9]">Git Status</span>
+<span class="text-green-500 font-bold flex items-center gap-1">Online <span class="size-1.5 rounded-full bg-green-500"></span></span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-[#929bc9]">Mantis Sync</span>
+<span class="text-green-500 font-bold flex items-center gap-1">Synced <span class="size-1.5 rounded-full bg-green-500"></span></span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-[#929bc9]">CI/CD Pipeline</span>
+<span class="text-yellow-500 font-bold flex items-center gap-1">1 Failure <span class="size-1.5 rounded-full bg-yellow-500"></span></span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-dark p-6">
+<!-- Heading -->
+<div class="flex flex-wrap justify-between items-end gap-3 mb-8">
+<div class="flex flex-col gap-1">
+<p class="text-white text-3xl font-black leading-tight tracking-[-0.033em]">Tech Lead Dashboard</p>
+<p class="text-[#929bc9] text-sm font-normal">Real-time code quality and sprint delivery tracking.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-border-dark text-white text-sm font-bold hover:bg-border-dark/60 transition-colors gap-2">
+<span class="material-symbols-outlined text-sm">sync</span>
+<span>Sync Git/Mantis</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:opacity-90 transition-opacity gap-2">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+<span>Release Action</span>
+</button>
+</div>
+</div>
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-card-dark border border-border-dark hover:border-red-500/40 transition-colors">
+<div class="flex justify-between items-start">
+<p class="text-[#929bc9] text-sm font-medium">Open Critical Bugs</p>
+<span class="material-symbols-outlined text-red-500">priority_high</span>
+</div>
+<p class="text-white text-3xl font-bold leading-tight">12</p>
+<p class="text-green-400 text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_down</span> -2 from yesterday
+                        </p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-card-dark border border-border-dark hover:border-primary/40 transition-colors">
+<div class="flex justify-between items-start">
+<p class="text-[#929bc9] text-sm font-medium">Pending PRs</p>
+<span class="material-symbols-outlined text-primary">reviews</span>
+</div>
+<p class="text-white text-3xl font-bold leading-tight">8</p>
+<p class="text-red-400 text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +3 urgent
+                        </p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-card-dark border border-border-dark hover:border-green-500/40 transition-colors">
+<div class="flex justify-between items-start">
+<p class="text-[#929bc9] text-sm font-medium">Sprint Velocity</p>
+<span class="material-symbols-outlined text-green-500">bolt</span>
+</div>
+<p class="text-white text-3xl font-bold leading-tight">42 pts</p>
+<p class="text-green-400 text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +5% productivity
+                        </p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-card-dark border border-border-dark">
+<div class="flex justify-between items-start">
+<p class="text-[#929bc9] text-sm font-medium">Pipeline Health</p>
+<span class="material-symbols-outlined text-blue-400">inventory_2</span>
+</div>
+<p class="text-white text-3xl font-bold leading-tight">98.2%</p>
+<p class="text-[#929bc9] text-xs font-medium">24 builds today</p>
+</div>
+</div>
+<!-- Charts and Lists -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+<!-- Tech Debt Trend -->
+<div class="flex flex-col gap-2 rounded-xl border border-border-dark bg-card-dark p-6">
+<div class="flex justify-between items-center mb-2">
+<p class="text-white text-lg font-bold">Technical Debt Trend</p>
+<button class="text-primary text-xs font-bold hover:underline">View Deep Dive</button>
+</div>
+<p class="text-white tracking-light text-[32px] font-bold leading-tight">120 hrs</p>
+<div class="flex gap-1 mb-4">
+<p class="text-[#929bc9] text-xs font-normal">Accumulated vs Resolution (Last 30 Days)</p>
+<p class="text-red-400 text-xs font-medium">-5.2% efficiency</p>
+</div>
+<div class="flex min-h-[180px] flex-1 flex-col gap-4 py-4">
+<svg fill="none" height="148" preserveaspectratio="none" viewbox="-3 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z" fill="url(#paint0_linear)"></path>
+<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#1337ec" stroke-linecap="round" stroke-width="3"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="paint0_linear" x1="236" x2="236" y1="1" y2="149">
+<stop stop-color="#1337ec" stop-opacity="0.3"></stop>
+<stop offset="1" stop-color="#1337ec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="flex justify-around text-[#929bc9] text-[11px] font-bold tracking-wider">
+<span>WK 1</span>
+<span>WK 2</span>
+<span>WK 3</span>
+<span>WK 4</span>
+</div>
+</div>
+</div>
+<!-- Developer Load Heatmap -->
+<div class="flex flex-col gap-2 rounded-xl border border-border-dark bg-card-dark p-6">
+<div class="flex justify-between items-center mb-2">
+<p class="text-white text-lg font-bold">Developer Task Load</p>
+<span class="text-[#929bc9] text-xs">Current Sprint</span>
+</div>
+<div class="grid grid-cols-1 gap-4 mt-4">
+<!-- Alex -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-white">Alex R. (Senior)</span>
+<span class="text-[#929bc9]">4/5 tasks • 80%</span>
+</div>
+<div class="w-full bg-border-dark h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 80%"></div>
+</div>
+</div>
+<!-- Sarah -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-white">Sarah M. (Junior)</span>
+<span class="text-[#929bc9]">7/7 tasks • 100%</span>
+</div>
+<div class="w-full bg-border-dark h-2 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full" style="width: 100%"></div>
+</div>
+</div>
+<!-- Mike -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-white">Mike T. (Mid)</span>
+<span class="text-[#929bc9]">3/6 tasks • 50%</span>
+</div>
+<div class="w-full bg-border-dark h-2 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full" style="width: 50%"></div>
+</div>
+</div>
+<!-- John -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-white">John D. (Senior)</span>
+<span class="text-[#929bc9]">6/8 tasks • 75%</span>
+</div>
+<div class="w-full bg-border-dark h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 75%"></div>
+</div>
+</div>
+<!-- Elena -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-white">Elena S. (DevOps)</span>
+<span class="text-[#929bc9]">2/5 tasks • 40%</span>
+</div>
+<div class="w-full bg-border-dark h-2 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full" style="width: 40%"></div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-4 text-[10px] text-[#929bc9] font-bold">
+<div class="flex items-center gap-1"><span class="size-2 rounded bg-green-500"></span> Underloaded</div>
+<div class="flex items-center gap-1"><span class="size-2 rounded bg-primary"></span> Optimal</div>
+<div class="flex items-center gap-1"><span class="size-2 rounded bg-red-500"></span> Overloaded</div>
+</div>
+</div>
+</div>
+<!-- PR Review Queue and Critical Path -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+<!-- PR Review Queue -->
+<div class="xl:col-span-2 flex flex-col rounded-xl border border-border-dark bg-card-dark overflow-hidden">
+<div class="p-6 border-b border-border-dark flex justify-between items-center">
+<h3 class="text-white text-lg font-bold">Pull Request Review Queue</h3>
+<button class="text-primary text-sm font-medium hover:underline">View All PRs</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-[#929bc9] text-xs border-b border-border-dark">
+<th class="px-6 py-4 font-bold">Title &amp; Branch</th>
+<th class="px-6 py-4 font-bold">Author</th>
+<th class="px-6 py-4 font-bold">Status</th>
+<th class="px-6 py-4 font-bold">Time Open</th>
+<th class="px-6 py-4 font-bold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark">
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<p class="text-white text-sm font-bold">Refactor: Auth Service Middleware</p>
+<p class="text-[10px] text-[#929bc9] font-mono tracking-tight">feature/auth-refactor</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-primary/20 flex items-center justify-center text-[10px] text-primary font-bold">SM</div>
+<span class="text-xs text-white">Sarah M.</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 text-[10px] bg-red-500/10 text-red-500 rounded-full font-bold border border-red-500/20">Blocked</span>
+</td>
+<td class="px-6 py-4 text-[#929bc9] text-xs">4h ago</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-white transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<p class="text-white text-sm font-bold">Fix: Mantis #1204 memory leak</p>
+<p class="text-[10px] text-[#929bc9] font-mono tracking-tight">bugfix/leak-1204</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-green-500/20 flex items-center justify-center text-[10px] text-green-500 font-bold">MT</div>
+<span class="text-xs text-white">Mike T.</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 text-[10px] bg-yellow-500/10 text-yellow-500 rounded-full font-bold border border-yellow-500/20">Awaiting Feedback</span>
+</td>
+<td class="px-6 py-4 text-[#929bc9] text-xs">12h ago</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-white transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<p class="text-white text-sm font-bold">Feature: WebSocket Gateway</p>
+<p class="text-[10px] text-[#929bc9] font-mono tracking-tight">feature/ws-gate</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-blue-500/20 flex items-center justify-center text-[10px] text-blue-500 font-bold">JD</div>
+<span class="text-xs text-white">John D.</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 text-[10px] bg-green-500/10 text-green-500 rounded-full font-bold border border-green-500/20">2 Approved</span>
+</td>
+<td class="px-6 py-4 text-[#929bc9] text-xs">1d ago</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:text-white transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Critical Path -->
+<div class="flex flex-col rounded-xl border border-border-dark bg-card-dark p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-white text-lg font-bold">Critical Path Tasks</h3>
+<span class="material-symbols-outlined text-[#929bc9]">timeline</span>
+</div>
+<div class="flex flex-col gap-5">
+<div class="relative pl-6 border-l-2 border-primary">
+<div class="absolute -left-[7px] top-0 size-3 rounded-full bg-primary border-2 border-card-dark"></div>
+<p class="text-xs font-bold text-white mb-1">Database Schema Migration</p>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-[10px] bg-primary/20 text-primary px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter">In Progress</span>
+<span class="text-[10px] text-[#929bc9]">ETA: Mar 12</span>
+</div>
+<div class="w-full bg-border-dark h-1.5 rounded-full">
+<div class="bg-primary h-full rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<div class="relative pl-6 border-l-2 border-border-dark">
+<div class="absolute -left-[7px] top-0 size-3 rounded-full bg-border-dark border-2 border-card-dark"></div>
+<p class="text-xs font-bold text-[#929bc9] mb-1">API Documentation Update</p>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-[10px] bg-border-dark text-[#929bc9] px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter">Pending</span>
+<span class="text-[10px] text-[#929bc9]">Blocked by Schema</span>
+</div>
+</div>
+<div class="relative pl-6 border-l-2 border-border-dark">
+<div class="absolute -left-[7px] top-0 size-3 rounded-full bg-border-dark border-2 border-card-dark"></div>
+<p class="text-xs font-bold text-[#929bc9] mb-1">Legacy Engine Decommission</p>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-[10px] bg-border-dark text-[#929bc9] px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter">Q4 Target</span>
+</div>
+</div>
+<div class="mt-4 p-3 bg-red-500/10 rounded-lg border border-red-500/20">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-red-500 text-sm">warning</span>
+<div>
+<p class="text-xs font-bold text-red-400">Risk Alert</p>
+<p class="text-[10px] text-red-400/80">Migration script failed on staging-2. Technical review required before merge.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Interactive Gantt Chart &amp; Timeline - PMO Management System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .gantt-grid {
+            background-size: 40px 100%;
+            background-image: linear-gradient(to right, #e7e9f3 1px, transparent 1px);
+        }
+        .dark .gantt-grid {
+            background-image: linear-gradient(to right, #2d314d 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d101b] dark:text-[#f8f9fc] min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7e9f3] dark:border-[#2d314d] px-10 py-3 bg-white dark:bg-[#1a1d2e] sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">account_tree</span>
+</div>
+<h2 class="text-[#0d101b] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">PMO System</h2>
+</div>
+<div class="flex items-center gap-9">
+<a class="text-[#4c599a] dark:text-[#a1a9d3] hover:text-primary dark:hover:text-white text-sm font-medium leading-normal" href="#">Portfolio</a>
+<a class="text-primary dark:text-white text-sm font-bold leading-normal border-b-2 border-primary" href="#">Timelines</a>
+<a class="text-[#4c599a] dark:text-[#a1a9d3] hover:text-primary dark:hover:text-white text-sm font-medium leading-normal" href="#">Resources</a>
+<a class="text-[#4c599a] dark:text-[#a1a9d3] hover:text-primary dark:hover:text-white text-sm font-medium leading-normal" href="#">Reports</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-[#4c599a] dark:text-[#a1a9d3] flex border-none bg-[#e7e9f3] dark:bg-[#2d314d] items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-[#e7e9f3] dark:bg-[#2d314d] text-[#0d101b] dark:text-white focus:ring-0 h-full placeholder:text-[#4c599a] px-4 rounded-r-lg pl-2 text-sm" placeholder="Search projects..."/>
+</div>
+</label>
+<button class="flex items-center gap-2 cursor-pointer rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold">
+<span class="material-symbols-outlined text-lg">upload_file</span>
+<span>Import MS Project</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-[#e7e9f3] dark:border-[#2d314d]" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDcPFRgORDa19BBqvxLi9Y1a21K6N-Dinc24sn_ZcrDrbTrM4eHGnAWDzCIJET7NL9mn8M3ex7-rneOKu13gcYFCUkhA2ZbV8qnAGWUbVTguv476aD3lQdjgQGrrEtEuWTAfmYmQwr3KR9ZI9CHzktgE4kwGA-HY73h379RL7spKHf6WRgQYdptAjaEKH7Y0isnikweOxDLZaaubjohTSwwtNU-jqlmJUUvHCeQbiZClkKAMpORN_jI8F4bqOPfkoXGA9jiJSHz3Ds");'></div>
+</div>
+</header>
+<main class="flex-1 flex flex-col p-6 max-w-[1600px] mx-auto w-full">
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-3 mb-6">
+<div class="flex flex-col gap-1">
+<p class="text-[#0d101b] dark:text-white text-3xl font-black leading-tight tracking-tight">Interactive Gantt Chart</p>
+<p class="text-[#4c599a] dark:text-[#a1a9d3] text-base font-normal">Global Project Portfolio Timeline • Q4 FY24</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex bg-[#e7e9f3] dark:bg-[#2d314d] p-1 rounded-lg">
+<label class="flex cursor-pointer h-8 px-4 items-center justify-center rounded-md bg-white dark:bg-[#1a1d2e] shadow-sm text-[#0d101b] dark:text-white text-xs font-bold">
+<span>Week</span>
+<input checked="" class="hidden" name="view" type="radio" value="Week"/>
+</label>
+<label class="flex cursor-pointer h-8 px-4 items-center justify-center rounded-md text-[#4c599a] dark:text-[#a1a9d3] text-xs font-bold">
+<span>Month</span>
+<input class="hidden" name="view" type="radio" value="Month"/>
+</label>
+<label class="flex cursor-pointer h-8 px-4 items-center justify-center rounded-md text-[#4c599a] dark:text-[#a1a9d3] text-xs font-bold">
+<span>Quarter</span>
+<input class="hidden" name="view" type="radio" value="Quarter"/>
+</label>
+</div>
+<button class="flex items-center gap-2 rounded-lg h-10 px-4 bg-[#e7e9f3] dark:bg-[#2d314d] text-[#0d101b] dark:text-white text-sm font-bold">
+<span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+<span>Export PDF</span>
+</button>
+<button class="flex items-center gap-2 rounded-lg h-10 px-4 bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-sm font-bold border border-red-200 dark:border-red-800">
+<span class="material-symbols-outlined text-lg">timeline</span>
+<span>Critical Path</span>
+</button>
+</div>
+</div>
+<!-- Gantt Interface Container -->
+<div class="flex-1 flex overflow-hidden rounded-xl border border-[#cfd3e7] dark:border-[#2d314d] bg-white dark:bg-[#1a1d2e] shadow-sm">
+<!-- Left Pane: Task List -->
+<div class="w-[450px] flex-shrink-0 flex flex-col border-r border-[#cfd3e7] dark:border-[#2d314d]">
+<div class="h-14 flex items-center px-4 bg-background-light dark:bg-[#151829] border-b border-[#cfd3e7] dark:border-[#2d314d]">
+<div class="grid grid-cols-[1fr_100px_100px] w-full text-xs font-bold uppercase tracking-wider text-[#4c599a] dark:text-[#a1a9d3]">
+<span>Task Name</span>
+<span class="text-center">Owner</span>
+<span class="text-center">Status</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<!-- Parent Task 1 -->
+<div class="group border-b border-[#cfd3e7]/50 dark:border-[#2d314d]/50 bg-primary/5 dark:bg-primary/10">
+<div class="grid grid-cols-[1fr_100px_100px] items-center h-12 px-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg cursor-pointer">expand_more</span>
+<span class="text-sm font-bold truncate">Phase 1: Market Research</span>
+</div>
+<div class="flex justify-center">
+<div class="size-7 rounded-full bg-[#e7e9f3] dark:bg-[#2d314d] flex items-center justify-center text-[10px] font-bold" title="Sarah J.">SJ</div>
+</div>
+<div class="flex justify-center">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 uppercase">In Progress</span>
+</div>
+</div>
+</div>
+<!-- Subtasks for Task 1 -->
+<div class="grid grid-cols-[1fr_100px_100px] items-center h-10 px-4 pl-10 border-b border-[#cfd3e7]/30 dark:border-[#2d314d]/30 hover:bg-background-light dark:hover:bg-[#24283d]">
+<span class="text-sm text-[#4c599a] dark:text-[#a1a9d3] truncate">User Interviews</span>
+<div class="flex justify-center">
+<div class="size-7 rounded-full bg-[#e7e9f3] dark:bg-[#2d314d] flex items-center justify-center text-[10px] font-bold" title="Mike K.">MK</div>
+</div>
+<div class="flex justify-center">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300 uppercase">Done</span>
+</div>
+</div>
+<div class="grid grid-cols-[1fr_100px_100px] items-center h-10 px-4 pl-10 border-b border-[#cfd3e7]/30 dark:border-[#2d314d]/30 hover:bg-background-light dark:hover:bg-[#24283d]">
+<span class="text-sm text-[#4c599a] dark:text-[#a1a9d3] truncate">Competitor Analysis</span>
+<div class="flex justify-center">
+<div class="size-7 rounded-full bg-[#e7e9f3] dark:bg-[#2d314d] flex items-center justify-center text-[10px] font-bold" title="Sarah J.">SJ</div>
+</div>
+<div class="flex justify-center">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 uppercase">Active</span>
+</div>
+</div>
+<!-- Milestone -->
+<div class="grid grid-cols-[1fr_100px_100px] items-center h-12 px-4 border-b border-[#cfd3e7]/50 dark:border-[#2d314d]/50 bg-yellow-50/30 dark:bg-yellow-900/10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg text-amber-500">diamond</span>
+<span class="text-sm font-bold truncate italic">Discovery Milestone</span>
+</div>
+<div class="flex justify-center">
+<div class="size-7 rounded-full bg-[#e7e9f3] dark:bg-[#2d314d] flex items-center justify-center text-[10px] font-bold" title="Leon R.">LR</div>
+</div>
+<div class="flex justify-center">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 uppercase">Target</span>
+</div>
+</div>
+<!-- Parent Task 2 -->
+<div class="group border-b border-[#cfd3e7]/50 dark:border-[#2d314d]/50 bg-primary/5 dark:bg-primary/10 mt-2">
+<div class="grid grid-cols-[1fr_100px_100px] items-center h-12 px-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg cursor-pointer">chevron_right</span>
+<span class="text-sm font-bold truncate">Phase 2: UI/UX Design</span>
+</div>
+<div class="flex justify-center">
+<div class="size-7 rounded-full bg-[#e7e9f3] dark:bg-[#2d314d] flex items-center justify-center text-[10px] font-bold" title="Leon R.">LR</div>
+</div>
+<div class="flex justify-center">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400 uppercase">Backlog</span>
+</div>
+</div>
+</div>
+<!-- Parent Task 3 -->
+<div class="group border-b border-[#cfd3e7]/50 dark:border-[#2d314d]/50 bg-primary/5 dark:bg-primary/10">
+<div class="grid grid-cols-[1fr_100px_100px] items-center h-12 px-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg cursor-pointer">expand_more</span>
+<span class="text-sm font-bold truncate">Phase 3: Development</span>
+</div>
+<div class="flex justify-center">
+<div class="size-7 rounded-full bg-[#e7e9f3] dark:bg-[#2d314d] flex items-center justify-center text-[10px] font-bold" title="Tech Team">DEV</div>
+</div>
+<div class="flex justify-center">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400 uppercase">Backlog</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Pane: Timeline Canvas -->
+<div class="flex-1 overflow-x-auto overflow-y-hidden flex flex-col relative bg-[#f8f9fc] dark:bg-[#151829]">
+<!-- Timeline Header -->
+<div class="h-14 flex flex-col flex-shrink-0 border-b border-[#cfd3e7] dark:border-[#2d314d] sticky top-0 bg-background-light dark:bg-[#151829] z-10">
+<div class="flex h-7 border-b border-[#cfd3e7] dark:border-[#2d314d]">
+<div class="w-[280px] flex-shrink-0 flex items-center justify-center border-r border-[#cfd3e7] dark:border-[#2d314d] text-[10px] font-bold uppercase text-[#4c599a] dark:text-[#a1a9d3]">October 2024</div>
+<div class="w-[280px] flex-shrink-0 flex items-center justify-center border-r border-[#cfd3e7] dark:border-[#2d314d] text-[10px] font-bold uppercase text-[#4c599a] dark:text-[#a1a9d3]">November 2024</div>
+<div class="w-[280px] flex-shrink-0 flex items-center justify-center text-[10px] font-bold uppercase text-[#4c599a] dark:text-[#a1a9d3]">December 2024</div>
+</div>
+<div class="flex h-7 gantt-grid">
+<!-- Repeated Day markers -->
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">01</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">02</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">03</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">04</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">05</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">06</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">07</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">08</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">09</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">10</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">11</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">12</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">13</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">14</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">15</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">16</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">17</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">18</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">19</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">20</div>
+<div class="w-10 flex-shrink-0 flex items-center justify-center text-[9px] font-medium text-[#4c599a] dark:text-[#a1a9d3]">21</div>
+</div>
+</div>
+<!-- Gantt Bars Canvas -->
+<div class="flex-1 gantt-grid min-w-[1200px]">
+<!-- Row for Parent Task 1 -->
+<div class="h-12 border-b border-[#cfd3e7]/50 dark:border-[#2d314d]/50 relative flex items-center bg-primary/5 dark:bg-primary/10">
+<div class="absolute left-[40px] h-6 rounded-md bg-primary flex items-center px-3 border-2 border-red-500 shadow-lg" style="width: 560px;">
+<span class="text-[10px] text-white font-bold truncate">Phase 1: Market Research (14 Days)</span>
+</div>
+</div>
+<!-- Row for Subtask: Interviews -->
+<div class="h-10 border-b border-[#cfd3e7]/30 dark:border-[#2d314d]/30 relative flex items-center">
+<div class="absolute left-[40px] h-4 rounded bg-green-500 flex items-center px-2" style="width: 200px;">
+<span class="text-[9px] text-white font-bold truncate">Interviews</span>
+</div>
+<!-- Dependency Link Mockup (simple line) -->
+<div class="absolute left-[240px] top-1/2 w-[40px] h-[1px] bg-primary/40"></div>
+</div>
+<!-- Row for Subtask: Competitor -->
+<div class="h-10 border-b border-[#cfd3e7]/30 dark:border-[#2d314d]/30 relative flex items-center">
+<div class="absolute left-[280px] h-4 rounded bg-primary flex items-center px-2 border border-primary/20" style="width: 320px;">
+<span class="text-[9px] text-white font-bold truncate">Comp. Analysis</span>
+</div>
+</div>
+<!-- Row for Milestone -->
+<div class="h-12 border-b border-[#cfd3e7]/50 dark:border-[#2d314d]/50 relative flex items-center bg-yellow-50/30 dark:bg-yellow-900/10">
+<div class="absolute left-[600px] flex flex-col items-center">
+<span class="material-symbols-outlined text-amber-500 text-2xl -mt-1">diamond</span>
+</div>
+</div>
+<!-- Row for Parent Task 2 -->
+<div class="h-12 border-b border-[#cfd3e7]/50 dark:border-[#2d314d]/50 relative flex items-center bg-primary/5 dark:bg-primary/10 mt-2">
+<div class="absolute left-[640px] h-6 rounded-md bg-slate-300 dark:bg-slate-700 flex items-center px-3" style="width: 400px;">
+<span class="text-[10px] text-slate-700 dark:text-slate-300 font-bold truncate">Phase 2: UI/UX (10 Days)</span>
+</div>
+</div>
+<!-- Row for Parent Task 3 -->
+<div class="h-12 border-b border-[#cfd3e7]/50 dark:border-[#2d314d]/50 relative flex items-center bg-primary/5 dark:bg-primary/10">
+<div class="absolute left-[1040px] h-6 rounded-md bg-slate-300 dark:bg-slate-700 flex items-center px-3" style="width: 200px;">
+<span class="text-[10px] text-slate-700 dark:text-slate-300 font-bold truncate">Phase 3: Dev (5 Days)</span>
+</div>
+</div>
+<!-- Critical Path Indicators -->
+<svg class="absolute top-0 left-0 w-full h-full pointer-events-none" style="z-index: 5;">
+<!-- Red Dependency Line for Critical Path -->
+<path d="M 600 70 L 640 180" fill="none" stroke="#ef4444" stroke-dasharray="4" stroke-width="1.5"></path>
+</svg>
+</div>
+<!-- Current Time Indicator -->
+<div class="absolute top-0 bottom-0 w-[2px] bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.5)] z-20" style="left: 300px;">
+<div class="absolute top-0 -left-[4px] size-2 rounded-full bg-red-500"></div>
+<div class="absolute top-14 left-1 bg-red-500 text-white text-[8px] font-bold px-1 rounded-sm">Today: Oct 08</div>
+</div>
+</div>
+</div>
+<!-- Footer / Legend -->
+<div class="mt-6 flex items-center justify-between">
+<div class="flex gap-6">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded bg-primary"></div>
+<span class="text-xs text-[#4c599a] dark:text-[#a1a9d3]">In Progress</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded bg-green-500"></div>
+<span class="text-xs text-[#4c599a] dark:text-[#a1a9d3]">Completed</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded border-2 border-red-500"></div>
+<span class="text-xs text-[#4c599a] dark:text-[#a1a9d3]">Critical Path</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-500 text-sm">diamond</span>
+<span class="text-xs text-[#4c599a] dark:text-[#a1a9d3]">Milestone</span>
+</div>
+</div>
+<div class="text-xs text-[#4c599a] dark:text-[#a1a9d3] italic">
+                * Drag bars to reschedule. Double-click to view details.
+            </div>
+</div>
+</main>
+</body></html>

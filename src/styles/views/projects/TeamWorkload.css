@@ -1,0 +1,303 @@
+/* ============================================
+   TEAM WORKLOAD MAIN STYLES
+   ============================================ */
+
+/* Main Table Card */
+.Twtable-card {
+  background-color: var(--card-light);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.dark .Twtable-card {
+  background-color: var(--card-dark);
+  border-color: var(--border-dark);
+}
+
+/* ============================================
+   BOTTOM CONTENT LAYOUT
+   ============================================ */
+
+.tw-content-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* Left and Right Columns - Base styles */
+.left-column,
+.right-column {
+  background-color: var(--card-light);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  height: auto;
+  min-height: 200px;
+  max-height: 350px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.dark .left-column,
+.dark .right-column {
+  background-color: var(--card-dark);
+  border-color: var(--border-dark);
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Extra Large Devices (1400px and above) */
+@media (min-width: 1400px) {
+  .tw-content-bottom {
+    gap: 1.5rem;
+  }
+
+  .left-column,
+  .right-column {
+    max-height: 350px;
+    min-height: 250px;
+  }
+
+  .Twtable-card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Large Devices (1200px to 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .tw-content-bottom {
+    gap: 1.25rem;
+  }
+
+  .left-column,
+  .right-column {
+    max-height: 350px;
+    min-height: 220px;
+  }
+}
+
+/* Desktop (992px to 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .tw-content-bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .left-column,
+  .right-column {
+    max-height: 350px;
+    min-height: 200px;
+  }
+}
+
+/* Tablet Landscape (768px to 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .tw-content-bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.875rem;
+  }
+
+  .left-column,
+  .right-column {
+    max-height: 350px;
+    min-height: 180px;
+  }
+}
+
+/* Tablet Portrait (576px to 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+  .tw-content-bottom {
+    grid-template-columns: 1fr;
+    /* Stack columns */
+    gap: 1rem;
+  }
+
+  .left-column,
+  .right-column {
+    max-height: 320px;
+    min-height: 180px;
+  }
+
+  /* Adjust spacing between stacked columns */
+  .left-column {
+    margin-bottom: 0;
+  }
+}
+
+/* Mobile Large (425px to 575px) */
+@media (min-width: 425px) and (max-width: 575px) {
+  .tw-content-bottom {
+    grid-template-columns: 1fr;
+    /* Stack columns */
+    gap: 0.875rem;
+  }
+
+  .left-column,
+  .right-column {
+    max-height: 300px;
+    min-height: 160px;
+  }
+
+  .Twtable-card {
+    margin-bottom: 0.875rem;
+  }
+}
+
+/* Mobile Medium (375px to 424px) */
+@media (min-width: 375px) and (max-width: 424px) {
+  .tw-content-bottom {
+    grid-template-columns: 1fr;
+    /* Stack columns */
+    gap: 0.75rem;
+  }
+
+  .left-column,
+  .right-column {
+    max-height: 280px;
+    min-height: 150px;
+  }
+
+  .Twtable-card {
+    margin-bottom: 0.75rem;
+  }
+}
+
+/* Mobile Small (320px to 374px) */
+@media (min-width: 320px) and (max-width: 374px) {
+  .tw-content-bottom {
+    grid-template-columns: 1fr;
+    /* Stack columns */
+    gap: 0.625rem;
+  }
+
+  .left-column,
+  .right-column {
+    max-height: 260px;
+    min-height: 140px;
+  }
+
+  .Twtable-card {
+    margin-bottom: 0.625rem;
+  }
+}
+
+/* Mobile Extra Small (below 320px) */
+@media (max-width: 319px) {
+  .tw-content-bottom {
+    grid-template-columns: 1fr;
+    /* Stack columns */
+    gap: 0.5rem;
+  }
+
+  .left-column,
+  .right-column {
+    max-height: 240px;
+    min-height: 130px;
+  }
+
+  .Twtable-card {
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ============================================
+   HEIGHT-BASED BREAKPOINTS (for tall screens)
+   ============================================ */
+
+@media (min-height: 900px) {
+
+  .left-column,
+  .right-column {
+    max-height: 400px;
+  }
+}
+
+@media (min-height: 1080px) {
+
+  .left-column,
+  .right-column {
+    max-height: 500px;
+  }
+}
+
+@media (min-height: 1200px) {
+
+  .left-column,
+  .right-column {
+    max-height: 600px;
+  }
+}
+
+/* ============================================
+   CONTENT-AWARE HEIGHT (when many items)
+   ============================================ */
+
+/* When columns have many items, allow them to be taller */
+.left-column:has(.member-item:nth-child(6)),
+.right-column:has(.metric-card:nth-child(6)) {
+  max-height: 500px;
+}
+
+@media (max-width: 768px) {
+
+  .left-column:has(.member-item:nth-child(6)),
+  .right-column:has(.metric-card:nth-child(6)) {
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .left-column:has(.member-item:nth-child(6)),
+  .right-column:has(.metric-card:nth-child(6)) {
+    max-height: 350px;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.left-column,
+.right-column {
+  animation: fadeIn 0.4s ease;
+}
+
+/* ============================================
+   DARK MODE UTILITIES
+   ============================================ */
+
+/* Ensure all cards use dark mode variables */
+.dark .card-light {
+  background-color: var(--card-dark) !important;
+  border-color: var(--border-dark) !important;
+}
+
+.dark .text-light {
+  color: var(--text-dark) !important;
+}
+
+.dark .muted-light {
+  color: var(--muted-dark) !important;
+}
+
+.dark .border-light {
+  border-color: var(--border-dark) !important;
+}

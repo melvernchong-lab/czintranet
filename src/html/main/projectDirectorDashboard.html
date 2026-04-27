@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PMO Director Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .heatmap-cell { aspect-ratio: 1; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d101b] dark:text-gray-100 transition-colors duration-200">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 border-r border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark flex flex-col justify-between p-4">
+<div class="flex flex-col gap-8">
+<div class="flex items-center gap-3 px-2">
+<div class="bg-primary p-1.5 rounded-lg text-white">
+<span class="material-symbols-outlined text-2xl">insights</span>
+</div>
+<div>
+<h1 class="text-sm font-bold leading-tight uppercase tracking-wider text-primary">Project Systems</h1>
+<p class="text-xs text-gray-500 dark:text-gray-400">Enterprise PMO</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-semibold">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-sm font-medium">Portfolio Health</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-sm font-medium">Budget Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Resource Planning</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">pie_chart</span>
+<span class="text-sm font-medium">Executive Reports</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<div class="p-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-100 dark:border-gray-800">
+<p class="text-xs text-gray-500 mb-2">AI System Status</p>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-emerald-500 animate-pulse"></div>
+<span class="text-xs font-medium">All Models Online</span>
+</div>
+</div>
+<button class="flex items-center justify-center gap-2 w-full bg-primary hover:bg-blue-700 text-white py-2.5 rounded-lg text-sm font-bold shadow-sm transition-all">
+<span class="material-symbols-outlined text-sm">file_download</span>
+<span>Export Global Report</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- Top Header -->
+<header class="h-16 border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-10 px-8 flex items-center justify-between">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative max-w-md w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xl">search</span>
+<input class="w-full bg-gray-100 dark:bg-gray-800 border-none rounded-lg pl-10 text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search portfolios, programs or financials..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 border-r border-gray-200 dark:border-gray-800 pr-4 mr-2">
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold leading-none">Marcus Thorne</p>
+<p class="text-[10px] text-gray-500">PMO Director</p>
+</div>
+<div class="size-9 rounded-full bg-gradient-to-tr from-primary to-blue-400 border-2 border-white dark:border-gray-800 shadow-sm overflow-hidden">
+<img alt="User" class="w-full h-full object-cover" data-alt="Portrait of a male executive" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeNeOzBlR5QVvMFBHjjKiqSzMkKxAMlx7AZGdSgiYSTLNmd-8ERRBp7LQGMEcWDAmWsKyMCZaDzxQTIO7KqIzC9SUNGkZc8cdfuKBYf-DWtKlIfXXo8nx68YyZWmpCTATDHq-UzBpfspWShapR2A2lm704xsfhTfmfZM1TFTYrmL-pclgZ1BTppjNxNAuLNXjGYJENMYLy8atCY1Yd0APXrsJhaK_wrOwrKgN75Y-IkvSK8nsBxlP7oD7D9A-IW_kzUTxkb5slgrQ"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-8 max-w-[1400px] mx-auto w-full flex flex-col gap-8">
+<!-- Page Title -->
+<div class="flex items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<p class="text-primary font-bold text-xs uppercase tracking-widest">Portfolio Command Center</p>
+<h2 class="text-3xl font-black tracking-tight">Executive Portfolio Overview</h2>
+<p class="text-gray-500 dark:text-gray-400 text-sm">Strategic insights and AI-predicted risk monitoring for the current fiscal period.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-semibold shadow-sm">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+<span>Q3 FY2023</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold shadow-sm">
+<span class="material-symbols-outlined text-lg">magic_button</span>
+<span>Generate Insights</span>
+</button>
+</div>
+</div>
+<!-- KPI Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-lg">
+<span class="material-symbols-outlined">health_and_safety</span>
+</div>
+<span class="text-xs font-bold text-emerald-600 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +2%
+                            </span>
+</div>
+<p class="text-sm font-medium text-gray-500">Portfolio Health</p>
+<p class="text-3xl font-black mt-1">85.4%</p>
+<div class="w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-emerald-500 h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 text-primary rounded-lg">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-xs font-bold text-red-600 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_down</span> -4.2%
+                            </span>
+</div>
+<p class="text-sm font-medium text-gray-500">Budget vs Actual (Variance)</p>
+<p class="text-3xl font-black mt-1">-$4.2M</p>
+<p class="text-[11px] text-gray-400 mt-2 italic">CapEx utilization at 92%</p>
+</div>
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-lg">
+<span class="material-symbols-outlined">group_work</span>
+</div>
+<span class="text-xs font-bold text-amber-600 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">warning</span> High
+                            </span>
+</div>
+<p class="text-sm font-medium text-gray-500">Resource Utilization</p>
+<p class="text-3xl font-black mt-1">92.0%</p>
+<div class="w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-amber-500 h-full w-[92%] rounded-full"></div>
+</div>
+</div>
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg">
+<span class="material-symbols-outlined">target</span>
+</div>
+<span class="text-xs font-bold text-gray-400">Stable</span>
+</div>
+<p class="text-sm font-medium text-gray-500">Strategic Alignment</p>
+<p class="text-3xl font-black mt-1">95.0%</p>
+<div class="w-full bg-gray-100 dark:bg-gray-700 h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-blue-500 h-full w-[95%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Column 1: Financials & Programs -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<!-- Financial Performance -->
+<div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
+<div class="p-5 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
+<h3 class="font-bold text-lg">Financial Performance (CapEx vs OpEx)</h3>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-sm bg-primary"></div>
+<span class="text-xs font-medium text-gray-500">Budget</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-3 rounded-sm bg-gray-300 dark:bg-gray-600"></div>
+<span class="text-xs font-medium text-gray-500">Actual</span>
+</div>
+</div>
+</div>
+<div class="p-6 h-64 flex items-end justify-between gap-4">
+<!-- Mock Chart -->
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-48">
+<div class="w-8 bg-primary rounded-t-sm h-[80%]"></div>
+<div class="w-8 bg-gray-200 dark:bg-gray-700 rounded-t-sm h-[75%]"></div>
+</div>
+<span class="text-[10px] font-bold text-gray-400 uppercase">Tech Refresh</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-48">
+<div class="w-8 bg-primary rounded-t-sm h-[95%]"></div>
+<div class="w-8 bg-gray-200 dark:bg-gray-700 rounded-t-sm h-[100%]"></div>
+</div>
+<span class="text-[10px] font-bold text-gray-400 uppercase">Cloud Mig</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-48">
+<div class="w-8 bg-primary rounded-t-sm h-[60%]"></div>
+<div class="w-8 bg-gray-200 dark:bg-gray-700 rounded-t-sm h-[55%]"></div>
+</div>
+<span class="text-[10px] font-bold text-gray-400 uppercase">Sec Ops</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-48">
+<div class="w-8 bg-primary rounded-t-sm h-[85%]"></div>
+<div class="w-8 bg-gray-200 dark:bg-gray-700 rounded-t-sm h-[80%]"></div>
+</div>
+<span class="text-[10px] font-bold text-gray-400 uppercase">Data Lake</span>
+</div>
+<div class="flex-1 flex flex-col items-center gap-2">
+<div class="w-full flex justify-center items-end gap-1 h-48">
+<div class="w-8 bg-primary rounded-t-sm h-[40%]"></div>
+<div class="w-8 bg-gray-200 dark:bg-gray-700 rounded-t-sm h-[45%]"></div>
+</div>
+<span class="text-[10px] font-bold text-gray-400 uppercase">ERP Revamp</span>
+</div>
+</div>
+</div>
+<!-- Program List -->
+<div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+<div class="p-5 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
+<h3 class="font-bold text-lg">Active Programs &amp; AI Risk Scores</h3>
+<button class="text-primary text-sm font-bold hover:underline">View All Programs</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-900/50 text-[11px] uppercase tracking-wider text-gray-500">
+<th class="px-6 py-3 font-bold">Program Name</th>
+<th class="px-6 py-3 font-bold">Manager</th>
+<th class="px-6 py-3 font-bold">Status</th>
+<th class="px-6 py-3 font-bold text-center">AI Risk Score</th>
+<th class="px-6 py-3 font-bold text-right">Completion</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-gray-100 dark:divide-gray-700">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<p class="text-sm font-bold">Global Cloud Migration</p>
+<p class="text-[11px] text-gray-400">ID: PRG-2023-004</p>
+</td>
+<td class="px-6 py-4 text-sm">Sarah Jenkins</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wide">On Track</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-1.5">
+<span class="text-sm font-black text-emerald-600">12</span>
+<span class="material-symbols-outlined text-emerald-600 text-sm">trending_flat</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold">64%</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<p class="text-sm font-bold">ERP Core Modernization</p>
+<p class="text-[11px] text-gray-400">ID: PRG-2023-012</p>
+</td>
+<td class="px-6 py-4 text-sm">Michael Ross</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-[10px] font-bold uppercase tracking-wide">At Risk</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-1.5">
+<span class="text-sm font-black text-amber-600">45</span>
+<span class="material-symbols-outlined text-amber-600 text-sm">trending_up</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold">32%</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<p class="text-sm font-bold">Customer Data Platform</p>
+<p class="text-[11px] text-gray-400">ID: PRG-2023-009</p>
+</td>
+<td class="px-6 py-4 text-sm">Elena Rodriguez</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold uppercase tracking-wide">Critical</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center justify-center gap-1.5">
+<span class="text-sm font-black text-red-600">88</span>
+<span class="material-symbols-outlined text-red-600 text-sm animate-pulse">priority_high</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold">18%</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Column 2: Resources & Alignment -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<!-- Resource Heatmap -->
+<div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+<div class="p-5 border-b border-gray-100 dark:border-gray-700">
+<h3 class="font-bold text-lg">Resource Heatmap</h3>
+<p class="text-xs text-gray-500">Utilization by Department (%)</p>
+</div>
+<div class="p-5">
+<div class="grid grid-cols-5 gap-2">
+<div class="text-[9px] uppercase font-bold text-gray-400">Dept</div>
+<div class="text-[9px] uppercase font-bold text-center text-gray-400">W1</div>
+<div class="text-[9px] uppercase font-bold text-center text-gray-400">W2</div>
+<div class="text-[9px] uppercase font-bold text-center text-gray-400">W3</div>
+<div class="text-[9px] uppercase font-bold text-center text-gray-400">W4</div>
+<div class="text-xs font-bold self-center">ENG</div>
+<div class="heatmap-cell bg-red-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">98</div>
+<div class="heatmap-cell bg-red-400 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">94</div>
+<div class="heatmap-cell bg-amber-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">88</div>
+<div class="heatmap-cell bg-emerald-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">75</div>
+<div class="text-xs font-bold self-center">UX</div>
+<div class="heatmap-cell bg-emerald-400 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">65</div>
+<div class="heatmap-cell bg-emerald-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">78</div>
+<div class="heatmap-cell bg-emerald-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">82</div>
+<div class="heatmap-cell bg-amber-400 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">85</div>
+<div class="text-xs font-bold self-center">PMO</div>
+<div class="heatmap-cell bg-emerald-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">80</div>
+<div class="heatmap-cell bg-emerald-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">80</div>
+<div class="heatmap-cell bg-emerald-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">80</div>
+<div class="heatmap-cell bg-emerald-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">82</div>
+<div class="text-xs font-bold self-center">QA</div>
+<div class="heatmap-cell bg-red-600 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">105</div>
+<div class="heatmap-cell bg-red-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">96</div>
+<div class="heatmap-cell bg-red-400 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">92</div>
+<div class="heatmap-cell bg-amber-500 rounded-sm flex items-center justify-center text-[10px] text-white font-bold">89</div>
+</div>
+<div class="mt-6 flex items-center justify-between">
+<div class="flex items-center gap-1">
+<div class="size-2 rounded-full bg-emerald-500"></div>
+<span class="text-[10px] text-gray-400">Optimal</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="size-2 rounded-full bg-amber-500"></div>
+<span class="text-[10px] text-gray-400">High</span>
+</div>
+<div class="flex items-center gap-1">
+<div class="size-2 rounded-full bg-red-500"></div>
+<span class="text-[10px] text-gray-400">Overloaded</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Strategic Alignment -->
+<div class="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+<h3 class="font-bold text-lg mb-4">Strategic Pillars Alignment</h3>
+<div class="flex flex-col gap-4">
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold">
+<span>Customer Experience</span>
+<span class="text-primary">42%</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[42%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold">
+<span>Operational Efficiency</span>
+<span class="text-emerald-500">30%</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full w-[30%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold">
+<span>Risk &amp; Compliance</span>
+<span class="text-amber-500">18%</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full w-[18%]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-bold">
+<span>Growth &amp; Innovation</span>
+<span class="text-purple-500">10%</span>
+</div>
+<div class="w-full bg-gray-100 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
+<div class="bg-purple-500 h-full w-[10%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Reports -->
+<div class="bg-primary dark:bg-primary/20 rounded-xl p-5 text-white">
+<h3 class="font-bold text-lg mb-4">Executive Quick Access</h3>
+<div class="grid grid-cols-1 gap-2">
+<button class="flex items-center gap-3 w-full bg-white/10 hover:bg-white/20 p-3 rounded-lg text-sm font-semibold transition-colors">
+<span class="material-symbols-outlined">description</span>
+<span>Q3 Financial Summary</span>
+</button>
+<button class="flex items-center gap-3 w-full bg-white/10 hover:bg-white/20 p-3 rounded-lg text-sm font-semibold transition-colors">
+<span class="material-symbols-outlined">rule</span>
+<span>Audit Logs (Last 24h)</span>
+</button>
+<button class="flex items-center gap-3 w-full bg-white/10 hover:bg-white/20 p-3 rounded-lg text-sm font-semibold transition-colors">
+<span class="material-symbols-outlined">history_edu</span>
+<span>Strategic Roadmap v2.1</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Insights Panel -->
+<div class="bg-white dark:bg-gray-800 rounded-xl border-l-4 border-l-primary border border-gray-200 dark:border-gray-700 shadow-sm p-6">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+<h3 class="font-black text-xl italic tracking-tight">AI Strategic Forecast</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex gap-4">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Critical Bottleneck Prediction</h4>
+<p class="text-sm text-gray-500 mt-1">AI models detect a high probability (84%) of resource shortages in <span class="text-primary font-semibold">Project Nexus</span> starting Week 4 due to overlapping QA phases. Recommendation: Shift QA cycles by 10 days.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="size-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-emerald-600">savings</span>
+</div>
+<div>
+<h4 class="font-bold text-sm">Budget Optimization Opportunity</h4>
+<p class="text-sm text-gray-500 mt-1">Operational savings in OpEx for <span class="text-emerald-600 font-semibold">Legacy Support</span> programs can be reallocated to accelerate the Cloud Migration program by 15% this quarter.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<footer class="p-8 border-t border-gray-200 dark:border-gray-800 text-center">
+<p class="text-xs text-gray-400">Last AI System Update: Today, 10:42 AM • Data refreshes every 15 minutes • <a class="underline" href="#">System Preferences</a></p>
+</footer>
+</main>
+</div>
+</body></html>

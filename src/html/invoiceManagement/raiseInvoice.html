@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Milestone Invoice &amp; Email Automation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex flex-col min-h-screen">
+<!-- Top Nav Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<span class="material-symbols-outlined text-3xl">account_tree</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">ProjectFlow</h2>
+</div>
+<label class="flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-slate-500 flex border-none bg-slate-100 dark:bg-slate-800 items-center justify-center pl-4 rounded-l-lg" data-icon="MagnifyingGlass">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-0 h-full placeholder:text-slate-500 px-4 rounded-r-lg text-base font-normal" placeholder="Search projects..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Projects</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Invoices</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Automations</a>
+<a class="text-slate-700 dark:text-slate-300 text-sm font-medium hover:text-primary transition-colors" href="#">Reports</a>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-slate-200 dark:border-slate-700" data-alt="User avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAxYgLg5PMfUUbf3jox6l_zWFJ6QtCRnY0Hx_uu35SZpd8EDVtl9rV9qA4l4xz2PS-fJBIKjUBceqS_Lp5p0qLBCw9EpbUSmpDkeoqDeNL94oGrgnwAVVRYKkvZopPBiL4kraR8cwpkOEMR_fskcph_A8ijskq__otkHjyJlELH01oqFeh0Jry376Y4kfYztP5VPGC7y77kGif86oPvNpqvVstZH-numERo96HsAQ6T7fZrvpwkUHDaFw87XIxSZCvvVlkav-gdOpA");'></div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col p-4 space-y-6">
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold">Acme Corp Solutions</h1>
+<p class="text-slate-500 text-xs font-medium">Enterprise Admin Account</p>
+</div>
+<nav class="flex flex-col gap-1">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">payments</span>
+<p class="text-sm font-bold">Milestone Billing</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">description</span>
+<p class="text-sm font-medium">Draft Invoices</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">mail</span>
+<p class="text-sm font-medium">Email Logs</p>
+</div>
+<hr class="my-4 border-slate-200 dark:border-slate-800"/>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
+<span class="material-symbols-outlined">auto_fix</span>
+<p class="text-sm font-medium">Workflow Builder</p>
+</div>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+<div class="max-w-[1400px] mx-auto p-8">
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-3 mb-8">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider">
+<span class="material-symbols-outlined text-base">receipt_long</span>
+                            Automation Hub
+                        </div>
+<h1 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">Milestone-Based Invoice Generation</h1>
+<p class="text-slate-500 dark:text-slate-400 text-lg font-medium">Project: MVP Development - Phase 2 (Mobile App)</p>
+</div>
+<button class="flex items-center justify-center rounded-lg h-11 px-6 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 text-sm font-bold hover:bg-slate-50 transition-all">
+<span class="material-symbols-outlined mr-2 text-primary">visibility</span>
+                        View Project Full Details
+                    </button>
+</div>
+<!-- Summary Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wide">Total Budget</p>
+<p class="text-slate-900 dark:text-white text-3xl font-black">$120,000.00</p>
+<div class="flex items-center gap-1 text-emerald-600 text-sm font-bold">
+<span class="material-symbols-outlined text-base">trending_up</span>
+<span>On Track</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm border-l-4 border-l-primary">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wide">Invoiced Amount</p>
+<p class="text-slate-900 dark:text-white text-3xl font-black">$45,000.00</p>
+<p class="text-slate-400 text-sm font-medium">37.5% of total budget</p>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wide">Remaining Bal.</p>
+<p class="text-slate-900 dark:text-white text-3xl font-black">$75,000.00</p>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full mt-2 overflow-hidden">
+<div class="bg-primary h-full" style="width: 37.5%;"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-8 items-start">
+<!-- Milestone Table -->
+<div class="flex-1 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h3 class="font-bold text-slate-800 dark:text-white">Active Milestones</h3>
+<span class="text-xs font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded uppercase text-slate-500 tracking-tighter">3 Milestones</span>
+</div>
+<table class="w-full">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50">
+<th class="px-6 py-3 text-left text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Milestone Name</th>
+<th class="px-6 py-3 text-left text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Status</th>
+<th class="px-6 py-3 text-left text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Budget Amount</th>
+<th class="px-6 py-3 text-right text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr>
+<td class="px-6 py-4 font-semibold text-slate-800 dark:text-slate-200">Phase 1: Discovery</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-full text-xs font-bold">Completed</span>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-400 font-medium">$15,000.00</td>
+<td class="px-6 py-4 text-right">
+<span class="text-slate-400 text-xs font-bold italic mr-2">Invoice Sent</span>
+<button class="inline-flex items-center p-2 text-slate-400 hover:text-primary"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="bg-primary/5 dark:bg-primary/10">
+<td class="px-6 py-4 font-bold text-slate-800 dark:text-white">Phase 2: MVP Design</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-primary/20 text-primary rounded-full text-xs font-bold">Ready to Bill</span>
+</td>
+<td class="px-6 py-4 text-slate-900 dark:text-slate-200 font-bold">$25,000.00</td>
+<td class="px-6 py-4 text-right">
+<button class="inline-flex items-center justify-center rounded-lg h-9 px-4 bg-primary text-white text-sm font-bold hover:bg-blue-700 shadow-sm transition-all ring-4 ring-primary/10">
+                                            Raise Invoice
+                                        </button>
+</td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-semibold text-slate-800 dark:text-slate-200">Phase 3: Development</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full text-xs font-bold">In Progress</span>
+</td>
+<td class="px-6 py-4 text-slate-600 dark:text-slate-400 font-medium">$50,000.00</td>
+<td class="px-6 py-4 text-right">
+<button class="inline-flex items-center justify-center rounded-lg h-9 px-4 bg-slate-100 dark:bg-slate-800 text-slate-400 text-sm font-bold cursor-not-allowed" disabled="">
+                                            Locked
+                                        </button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Configuration Panel -->
+<div class="w-[420px] shrink-0 bg-white dark:bg-slate-900 rounded-xl border-2 border-primary shadow-2xl overflow-hidden flex flex-col">
+<div class="bg-primary p-6 text-white">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="text-lg font-black uppercase tracking-tight">Invoice Configurator</h4>
+<p class="text-primary-200 text-xs font-medium opacity-80">Phase 2: MVP Design</p>
+</div>
+<span class="material-symbols-outlined text-white/50 cursor-pointer">close</span>
+</div>
+<!-- Visual Workflow Map -->
+<div class="flex items-center justify-between mt-6 px-2">
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-white flex items-center justify-center text-primary shadow-md">
+<span class="material-symbols-outlined text-lg font-bold">person</span>
+</div>
+<span class="text-[10px] font-bold uppercase">PM Request</span>
+</div>
+<div class="h-0.5 flex-1 bg-white/30 mx-2 -mt-4"></div>
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-white/20 border-2 border-white/50 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">account_balance</span>
+</div>
+<span class="text-[10px] font-bold uppercase opacity-60">Finance Appr.</span>
+</div>
+<div class="h-0.5 flex-1 bg-white/30 mx-2 -mt-4"></div>
+<div class="flex flex-col items-center gap-1">
+<div class="size-8 rounded-full bg-white/20 border-2 border-white/50 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">forward_to_inbox</span>
+</div>
+<span class="text-[10px] font-bold uppercase opacity-60">Auto-Email</span>
+</div>
+</div>
+</div>
+<div class="p-6 space-y-6 overflow-y-auto max-h-[600px]">
+<!-- Section 1: Amount -->
+<div>
+<label class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Invoice Amount Verification</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-lg py-3 pl-8 pr-4 text-xl font-black text-slate-800 dark:text-white focus:border-primary focus:ring-0" type="text" value="25,000.00"/>
+</div>
+<p class="mt-2 text-xs text-slate-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">info</span>
+                                    Matches 100% of milestone budget allocation.
+                                </p>
+</div>
+<!-- Section 2: Gmail Integration -->
+<div class="pt-6 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2 mb-4">
+<div class="p-1.5 bg-red-100 dark:bg-red-900/30 text-red-600 rounded">
+<span class="material-symbols-outlined text-base">mail</span>
+</div>
+<h5 class="font-bold text-slate-800 dark:text-white text-sm">Gmail Integration</h5>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-[10px] font-black text-slate-400 uppercase tracking-wider mb-2">Select Email Template</label>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-2 px-3 text-xs font-bold border-2 border-primary bg-primary/5 text-primary rounded-lg text-center">
+                                                Standard Invoice
+                                            </button>
+<button class="py-2 px-3 text-xs font-bold border-2 border-slate-100 dark:border-slate-700 text-slate-500 dark:text-slate-400 rounded-lg text-center hover:border-slate-200 transition-all">
+                                                Detailed Breakdown
+                                            </button>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-dashed border-slate-200 dark:border-slate-700">
+<p class="text-[10px] text-slate-400 mb-1">Subject: Invoice for Phase 2: MVP Design - Acme Corp</p>
+<p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2">Dear Client, Please find the invoice for the recently completed milestone...</p>
+</div>
+</div>
+</div>
+<!-- Section 3: Workflow Automation -->
+<div class="pt-6 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-800 rounded-xl">
+<div class="flex flex-col gap-0.5">
+<p class="text-xs font-black text-slate-800 dark:text-white uppercase tracking-tight">Workflow Automation</p>
+<p class="text-[10px] text-slate-500 font-medium">Auto-email upon Finance Approval</p>
+</div>
+<div class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-primary transition-colors duration-200 ease-in-out">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="p-6 bg-slate-50 dark:bg-slate-800/50 space-y-3">
+<button class="w-full flex items-center justify-center rounded-lg h-12 px-6 bg-white dark:bg-slate-800 text-primary border border-primary/30 text-sm font-bold hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined mr-2">picture_as_pdf</span>
+                                Preview Generated Invoice
+                            </button>
+<button class="w-full flex items-center justify-center rounded-lg h-12 px-6 bg-primary text-white text-sm font-black hover:bg-blue-700 shadow-lg shadow-primary/20 transition-all uppercase tracking-widest">
+                                Submit for Approval
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

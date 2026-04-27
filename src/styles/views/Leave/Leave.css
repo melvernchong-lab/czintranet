@@ -1,0 +1,235 @@
+/* ============ LEAVE MODULE - MAIN CONTAINERS ============ */
+/* Leave Module Main Content  */
+.leave-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.page-subtitle-text{
+  margin-top: 1rem;
+  font-size: 16px;
+}
+
+/* Request Leave Button */
+.request-leave-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 16px;
+  height: 40px;
+  background: var(--primary);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.request-leave-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.request-leave-btn:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ============ LEAVE GRID - TOP CARDS ============ */
+.leave-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* ============ MID SECTION - CONTENT GRID ============ */
+.history-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.upcoming-section {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* ============ RESPONSIVE DESIGN ============ */
+/* Tablet (1200px and below) */
+@media (max-width: 1200px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .upcoming-section {
+    grid-column: 1;
+    grid-row: 2;
+  }
+}
+
+/* Small Tablet (1024px and below) */
+@media (max-width: 1024px) {
+  .leave-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+/* Mobile (768px and below) */
+@media (max-width: 768px) {
+  .leave-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .leave-title-section {
+    text-align: center;
+  }
+
+  .header-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  .request-leave-btn {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .leave-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .leave-card {
+    padding: 16px;
+  }
+
+  .leave-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .leave-section-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .leave-table-container {
+    border-radius: 8px;
+  }
+}
+
+/* Small Mobile (480px and below) */
+@media (max-width: 480px) {
+  .leave-card {
+    padding: 14px;
+  }
+
+  .leave-header {
+    margin-bottom: 16px;
+  }
+
+  .leave-value {
+    font-size: 18px;
+  }
+
+  .leave-detail {
+    font-size: 11px;
+  }
+
+  .leave-section-title {
+    font-size: 16px;
+  }
+
+  .view-all-btn,
+  .filter-btn {
+    font-size: 11px;
+    padding: 6px;
+  }
+
+  .table-header-row,
+  .table-row-lg {
+    padding: 0.75rem 1rem;
+  }
+
+  .type-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .type-name {
+    font-size: 13px;
+  }
+
+  .date-range {
+    font-size: 13px;
+  }
+
+  .date-reason {
+    font-size: 11px;
+  }
+
+  .days-value {
+    font-size: 13px;
+  }
+
+  .status-badge {
+    font-size: 10px;
+    padding: 3px 10px;
+  }
+}
+
+/* Extra Small Mobile (360px and below) */
+@media (max-width: 360px) {
+  .leave-card {
+    padding: 12px;
+  }
+
+  .leave-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+
+  .leave-label {
+    font-size: 11px;
+  }
+
+  .leave-value {
+    font-size: 16px;
+  }
+
+  .table-header-cell {
+    font-size: 10px;
+  }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+
+  .leave-card,
+  .request-leave-btn,
+  .leave-progress-fill {
+    transition: none;
+  }
+
+  .leave-card:hover {
+    transform: none;
+  }
+}

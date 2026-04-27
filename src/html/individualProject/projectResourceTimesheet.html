@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resource Utilization &amp; Timesheets | PMO Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1337ec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101322",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .heat-map-cell { min-width: 40px; height: 40px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d101b] dark:text-gray-100 min-h-screen">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7e9f3] dark:border-gray-800 bg-white dark:bg-[#1a1d2e] px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<span class="material-symbols-outlined text-3xl">dashboard_customize</span>
+</div>
+<h2 class="text-[#0d101b] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">PMO Central</h2>
+</div>
+<nav class="flex items-center gap-9">
+<a class="text-[#0d101b] dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Portfolios</a>
+<a class="text-[#0d101b] dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Timelines</a>
+<a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary" href="#">Resources</a>
+<a class="text-[#0d101b] dark:text-gray-300 text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Reports</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4">
+<label class="flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+<div class="text-[#4c599a] flex border-none bg-[#e7e9f3] dark:bg-gray-800 items-center justify-center pl-4 rounded-l-lg border-r-0">
+<span class="material-symbols-outlined text-xl">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-[#e7e9f3] dark:bg-gray-800 text-[#0d101b] dark:text-white placeholder:text-[#4c599a] px-4 rounded-r-lg text-sm font-normal focus:ring-0" placeholder="Search resources..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold tracking-[0.015em] hover:bg-blue-700">
+<span class="material-symbols-outlined mr-2 text-lg">sync</span>
+<span class="truncate">Sync API</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#e7e9f3] dark:bg-gray-800 text-[#0d101b] dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-white dark:border-gray-700" data-alt="Corporate headshot of a female executive" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAHtkHJ6S4sJzgi-EoTavBa0ds1-IThp9PJom2sfXW9NGvruVA8upNZuioRKfuiwVTlXh0-82h3-sWcfBr0Y6HOVicDm5IVL7eUIW5ery59SSWI9732yfcgvjW5lM4318CA5U5CzgPU5VlRjIka-7hqnjMD9H6wbXEQAyo_pKC7K7dzn0y22AUk8fiJCEOm18GEqEgwfq_6Gxh7l8dCEJCG5LNzJNM7hVmBvU6EUuExapTNc6eIq_iRxJmwNG6759h6riUvDp-FsNg");'></div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- Sidebar Filter Navigation -->
+<aside class="w-72 border-r border-[#e7e9f3] dark:border-gray-800 bg-white dark:bg-[#1a1d2e] p-6 flex flex-col justify-between sticky top-[64px] h-[calc(100vh-64px)]">
+<div class="flex flex-col gap-6">
+<div>
+<h1 class="text-[#0d101b] dark:text-white text-lg font-bold">Filters</h1>
+<p class="text-[#4c599a] text-sm">Refine resource insights</p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-xs font-bold text-[#4c599a] uppercase tracking-wider mb-2">Departments</p>
+<button class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary border-l-4 border-primary">
+<span class="material-symbols-outlined">corporate_fare</span>
+<p class="text-sm font-semibold">All Departments</p>
+</button>
+<button class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c599a] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined">code</span>
+<p class="text-sm font-medium">Engineering</p>
+</button>
+<button class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c599a] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined">inventory_2</span>
+<p class="text-sm font-medium">Product</p>
+</button>
+<button class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#4c599a] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined">campaign</span>
+<p class="text-sm font-medium">Marketing</p>
+</button>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-xs font-bold text-[#4c599a] uppercase tracking-wider mb-2">Project Managers</p>
+<label class="flex items-center gap-2 px-3 py-1">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm">Alex Rivera</span>
+</label>
+<label class="flex items-center gap-2 px-3 py-1">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm">Sarah Chen</span>
+</label>
+<label class="flex items-center gap-2 px-3 py-1">
+<input class="rounded border-gray-300 text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm">Jordan Smith</span>
+</label>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<button class="flex w-full cursor-pointer items-center justify-center rounded-lg h-11 px-4 bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20">
+<span>Apply Filters</span>
+</button>
+<button class="flex w-full items-center justify-center gap-2 text-[#4c599a] hover:text-primary text-sm font-medium py-2">
+<span class="material-symbols-outlined text-lg">download</span>
+<span>Export CSV Report</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto p-8 max-w-[1400px]">
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-3 mb-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#0d101b] dark:text-white text-4xl font-black leading-tight tracking-tight">Resource Utilization &amp; Timesheets</h1>
+<div class="flex items-center gap-2 text-[#4c599a]">
+<span class="material-symbols-outlined text-sm">update</span>
+<p class="text-sm font-normal">Last synced from Jira &amp; Workday: Oct 24, 2023 - 09:45 AM</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 bg-white dark:bg-gray-800 border border-[#cfd3e7] dark:border-gray-700 px-4 py-2 rounded-lg text-sm font-bold shadow-sm">
+<span class="material-symbols-outlined text-lg text-[#4c599a]">calendar_month</span>
+                            Oct 16 - Oct 22, 2023
+                        </button>
+</div>
+</div>
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-[#1a1d2e] p-6 border border-[#cfd3e7] dark:border-gray-800 shadow-sm">
+<p class="text-[#4c599a] text-sm font-medium uppercase tracking-wider">Total Available Capacity</p>
+<div class="flex items-baseline gap-2">
+<p class="text-[#0d101b] dark:text-white text-3xl font-black">4,200 <span class="text-lg font-normal">hrs</span></p>
+<p class="text-[#07883f] text-sm font-bold">+5.2%</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-[#1a1d2e] p-6 border border-[#cfd3e7] dark:border-gray-800 shadow-sm border-l-4 border-l-red-500">
+<p class="text-[#4c599a] text-sm font-medium uppercase tracking-wider">Over-allocated Resources</p>
+<div class="flex items-baseline gap-2">
+<p class="text-[#0d101b] dark:text-white text-3xl font-black">12 <span class="text-lg font-normal">Team Members</span></p>
+<p class="text-red-600 text-sm font-bold">+2 New</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl bg-white dark:bg-[#1a1d2e] p-6 border border-[#cfd3e7] dark:border-gray-800 shadow-sm">
+<p class="text-[#4c599a] text-sm font-medium uppercase tracking-wider">Unassigned Hours</p>
+<div class="flex items-baseline gap-2">
+<p class="text-[#0d101b] dark:text-white text-3xl font-black">450 <span class="text-lg font-normal">hrs</span></p>
+<p class="text-[#e73c08] text-sm font-bold">-10%</p>
+</div>
+</div>
+</div>
+<!-- Heat Map Section -->
+<div class="bg-white dark:bg-[#1a1d2e] rounded-xl border border-[#cfd3e7] dark:border-gray-800 overflow-hidden mb-8 shadow-sm">
+<div class="px-6 py-4 border-b border-[#e7e9f3] dark:border-gray-800 flex justify-between items-center bg-gray-50 dark:bg-gray-800/50">
+<h2 class="text-[#0d101b] dark:text-white text-lg font-bold">Workload Intensity Heat Map</h2>
+<div class="flex items-center gap-4 text-xs font-medium text-[#4c599a]">
+<div class="flex items-center gap-1"><div class="w-3 h-3 bg-gray-200 dark:bg-gray-700 rounded-sm"></div> 0%</div>
+<div class="flex items-center gap-1"><div class="w-3 h-3 bg-green-200 rounded-sm"></div> 1-70%</div>
+<div class="flex items-center gap-1"><div class="w-3 h-3 bg-green-500 rounded-sm"></div> 71-100%</div>
+<div class="flex items-center gap-1"><div class="w-3 h-3 bg-red-500 rounded-sm"></div> &gt;100%</div>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-white dark:bg-[#1a1d2e]">
+<th class="px-6 py-3 text-xs font-bold uppercase tracking-wider text-[#4c599a] border-b border-r border-[#e7e9f3] dark:border-gray-800 w-64 sticky left-0 bg-white dark:bg-[#1a1d2e]">Resource Name</th>
+<th class="px-2 py-3 text-center text-xs font-bold text-[#4c599a] border-b border-[#e7e9f3] dark:border-gray-800">Mon 16</th>
+<th class="px-2 py-3 text-center text-xs font-bold text-[#4c599a] border-b border-[#e7e9f3] dark:border-gray-800">Tue 17</th>
+<th class="px-2 py-3 text-center text-xs font-bold text-[#4c599a] border-b border-[#e7e9f3] dark:border-gray-800">Wed 18</th>
+<th class="px-2 py-3 text-center text-xs font-bold text-[#4c599a] border-b border-[#e7e9f3] dark:border-gray-800">Thu 19</th>
+<th class="px-2 py-3 text-center text-xs font-bold text-[#4c599a] border-b border-[#e7e9f3] dark:border-gray-800">Fri 20</th>
+<th class="px-2 py-3 text-center text-xs font-bold text-[#4c599a] border-b border-[#e7e9f3] dark:border-gray-800 bg-gray-50 dark:bg-gray-800/20">Sat 21</th>
+<th class="px-2 py-3 text-center text-xs font-bold text-[#4c599a] border-b border-[#e7e9f3] dark:border-gray-800 bg-gray-50 dark:bg-gray-800/20">Sun 22</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-[#e7e9f3] dark:border-gray-800">
+<td class="px-6 py-4 text-sm font-semibold sticky left-0 bg-white dark:bg-[#1a1d2e] border-r dark:border-gray-800">David Miller (Eng)</td>
+<td class="p-1"><div class="bg-green-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">8h</div></td>
+<td class="p-1"><div class="bg-green-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">8h</div></td>
+<td class="p-1"><div class="bg-red-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">10h</div></td>
+<td class="p-1"><div class="bg-green-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">8h</div></td>
+<td class="p-1"><div class="bg-green-200 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-green-800 font-bold">4h</div></td>
+<td class="p-1"><div class="bg-gray-100 dark:bg-gray-800 rounded-md heat-map-cell"></div></td>
+<td class="p-1"><div class="bg-gray-100 dark:bg-gray-800 rounded-md heat-map-cell"></div></td>
+</tr>
+<tr class="border-b border-[#e7e9f3] dark:border-gray-800">
+<td class="px-6 py-4 text-sm font-semibold sticky left-0 bg-white dark:bg-[#1a1d2e] border-r dark:border-gray-800">Elena Rodriguez (Des)</td>
+<td class="p-1"><div class="bg-red-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">12h</div></td>
+<td class="p-1"><div class="bg-red-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">12h</div></td>
+<td class="p-1"><div class="bg-red-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">10h</div></td>
+<td class="p-1"><div class="bg-green-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">8h</div></td>
+<td class="p-1"><div class="bg-green-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">8h</div></td>
+<td class="p-1"><div class="bg-gray-100 dark:bg-gray-800 rounded-md heat-map-cell"></div></td>
+<td class="p-1"><div class="bg-gray-100 dark:bg-gray-800 rounded-md heat-map-cell"></div></td>
+</tr>
+<tr class="border-b border-[#e7e9f3] dark:border-gray-800">
+<td class="px-6 py-4 text-sm font-semibold sticky left-0 bg-white dark:bg-[#1a1d2e] border-r dark:border-gray-800">Marcus Wright (Prod)</td>
+<td class="p-1"><div class="bg-green-200 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-green-800 font-bold">2h</div></td>
+<td class="p-1"><div class="bg-green-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">8h</div></td>
+<td class="p-1"><div class="bg-green-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">8h</div></td>
+<td class="p-1"><div class="bg-green-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">8h</div></td>
+<td class="p-1"><div class="bg-green-500 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-white font-bold">8h</div></td>
+<td class="p-1"><div class="bg-green-200 rounded-md heat-map-cell flex items-center justify-center text-[10px] text-green-800 font-bold">4h</div></td>
+<td class="p-1"><div class="bg-gray-100 dark:bg-gray-800 rounded-md heat-map-cell"></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Detailed Timesheet Table -->
+<div class="bg-white dark:bg-[#1a1d2e] rounded-xl border border-[#cfd3e7] dark:border-gray-800 overflow-hidden shadow-sm">
+<div class="px-6 py-5 border-b border-[#e7e9f3] dark:border-gray-800">
+<h2 class="text-[#0d101b] dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Detailed Task Log</h2>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50 dark:bg-gray-800/30">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#4c599a]">Task Name</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#4c599a]">Assigned To</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#4c599a]">Logged vs. Est</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#4c599a] w-64">% Completion</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#4c599a]">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#e7e9f3] dark:divide-gray-800">
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#0d101b] dark:text-white">API Integration: Stripe Connect</span>
+<span class="text-xs text-[#4c599a]">FinTech Core Modernization</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="Resource avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDKeGOzyFgZ2v3JPTlqibt9yD-33aZPfmnVzF-XqpEoU_Vj1epPD4vAtesvo8Bc2exSk0cK5HGI0ICOCcKWtxZxDLcOPXNWswxHf3qhb6fZms_P_-kHgjwokWLEesC5E82YysDQqXPGHcMU40SrxmGbmLSrSyr8a8jBsXgtiuSJB6DEJuk85M20AJet6vHnv2KnV_YzRSoil1Utw-R8T4E_2otx0SuyMIo4Wf5io6_CFuckHP5R8h08mkdsQPX_3Wxxf5UejA5rZX4');"></div>
+<span class="text-sm font-medium">David Miller</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-sm">
+<span class="font-bold">34</span>
+<span class="text-[#4c599a]">/ 40 hrs</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-[10px] font-bold">
+<span>Progress</span>
+<span>85%</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 85%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">On Track</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#0d101b] dark:text-white">UX Discovery Workshops</span>
+<span class="text-xs text-[#4c599a]">Customer Portal V2</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="Resource avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCDJnZpWNo_2WH5NjMACopwsrw7KQIRYqbwOPtavoJEfWw5m5QrIke5xDZWfwcMsyQ4PikUkniOjglfHHYLjBMNtPAob-HTuZW_8c6jsRudEQl5_3V179QJ_m1K_b2dNjMy_dH0QBXRwCr_j6UG1eQrLbPUInzpcniNciPTaFw4OfyXU92gmpMMOchGUJzQJjjvaVImsbWdeZc4XxJ-zhZAa-gEcMxAp00KHjpXsapWOaD-ayb9tnqvqMXWQh2Hd9LXtPeLme3AnXU');"></div>
+<span class="text-sm font-medium">Elena Rodriguez</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-sm">
+<span class="font-bold text-red-600">42</span>
+<span class="text-[#4c599a]">/ 35 hrs</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-[10px] font-bold">
+<span>Progress</span>
+<span>60%</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">At Risk</span>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 dark:hover:bg-gray-800/40 transition-colors">
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-[#0d101b] dark:text-white">QBR Documentation</span>
+<span class="text-xs text-[#4c599a]">Internal Ops</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-cover bg-center" data-alt="Resource avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBVw7DSWBbUgEPEMk5szAh9h4fVHfaPw1VFEilNiWsjoQW_t46PqIQLs4OrGc3SFiSZKxOa1_uJ3Yc7K82ctpfUTP_Q3q8JkvG1RH9o1bS1Qpqc566hwNT5aZXoZH_Te_X_7ZYkTRS_nZ8jbeZtTrgSp0S5YM2RlRSAbtcDqEPLPXyah6AvkN0eleoFix08XQDxWwfTkDuIvTGKlsbAa-WkbdfjfCuvDaqvAHdl9dh9B6yBPUXKyUjdwXwCPMQ5465pYe_zRjTnpbw');"></div>
+<span class="text-sm font-medium">Marcus Wright</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5 text-sm">
+<span class="font-bold">12</span>
+<span class="text-[#4c599a]">/ 20 hrs</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-[10px] font-bold">
+<span>Progress</span>
+<span>100%</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full rounded-full" style="width: 100%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">Completed</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-6 py-4 border-t border-[#e7e9f3] dark:border-gray-800 bg-gray-50 dark:bg-gray-800/20 flex justify-between items-center">
+<span class="text-xs text-[#4c599a]">Showing 1-10 of 128 tasks</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-xs border border-[#cfd3e7] dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 text-xs border border-[#cfd3e7] dark:border-gray-700 rounded-md bg-white dark:bg-gray-800">Next</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>
